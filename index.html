@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Little Oaks Daycare & Montessori — Waterloo</title>
+<meta name="description" content="A small, family-run Montessori daycare in Waterloo for children ages 0–4. Warm, attentive care rooted in respect for the child.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Newsreader:opsz,wght@6..72,300..600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ---------- Tokens ---------- */
+:root {
+    --cream: #faf4e8;
+    --cream-deep: #f3ead6;
+    --bark: #2a1f17;
+    --bark-soft: #4a3a2c;
+    --lavender: #b8a4d0;
+    --lavender-deep: #6b5478;
+    --lavender-soft: #ebe4f1;
+    --moss: #7a8e6f;
+    --moss-deep: #4a5e42;
+    --acorn: #8b5a2b;
+    --acorn-light: #c9986a;
+    --tomato: #d65a3a;
+    --sun: #f4c95d;
+    --sky: #a8c8d8;
+    --ink: #1a1410;
+
+    --shadow-soft: 0 1px 2px rgba(42, 31, 23, 0.04), 0 8px 24px rgba(42, 31, 23, 0.06);
+    --shadow-lift: 0 2px 4px rgba(42, 31, 23, 0.06), 0 16px 40px rgba(42, 31, 23, 0.10);
+
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Newsreader', Georgia, serif;
+    --font-hand: 'Caveat', cursive;
+
+    --radius-sm: 8px;
+    --radius: 16px;
+    --radius-lg: 28px;
+
+    --max: 1200px;
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.65;
+    color: var(--bark);
+    background: var(--cream);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; border: none; background: none; }
+
+h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0;
+    color: var(--ink);
+    font-variation-settings: "SOFT" 50;
+}
+
+.skip-link {
+    position: absolute; top: -100px; left: 1rem;
+    background: var(--ink); color: var(--cream); padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm); z-index: 100;
+}
+.skip-link:focus { top: 1rem; }
+
+/* ---------- Buttons ---------- */
+.btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 1.5rem;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 1rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    white-space: nowrap;
+}
+.btn-sm { padding: 0.55rem 1.1rem; font-size: 0.95rem; }
+.btn-primary {
+    background: var(--lavender-deep);
+    color: var(--cream);
+    box-shadow: 0 2px 0 #4a3956;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 0 #4a3956; background: #5a466a; }
+.btn-primary:active { transform: translateY(1px); box-shadow: 0 1px 0 #4a3956; }
+.btn-secondary {
+    background: var(--tomato);
+    color: var(--cream);
+    box-shadow: 0 2px 0 #a13d22;
+}
+.btn-secondary:hover { transform: translateY(-2px); box-shadow: 0 4px 0 #a13d22; }
+.btn-ghost {
+    background: transparent;
+    color: var(--bark);
+    border: 1.5px solid var(--bark);
+}
+.btn-ghost:hover { background: var(--bark); color: var(--cream); }
+
+/* ---------- Header ---------- */
+.site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(250, 244, 232, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(42, 31, 23, 0.08);
+}
+.header-inner {
+    max-width: var(--max); margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 1.5rem; gap: 2rem;
+}
+.brand { display: flex; align-items: center; gap: 0.75rem; }
+.brand-mark { width: 42px; height: 42px; flex: none; }
+.brand-mark svg { width: 100%; height: 100%; }
+.brand-text { display: flex; flex-direction: column; line-height: 1; }
+.brand-name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.35rem;
+    color: var(--ink);
+    font-variation-settings: "SOFT" 80;
+}
+.brand-tag {
+    font-family: var(--font-hand);
+    font-size: 1rem;
+    color: var(--lavender-deep);
+    margin-top: 2px;
+}
+.primary-nav { display: flex; gap: 1.75rem; }
+.primary-nav a {
+    font-size: 0.98rem;
+    color: var(--bark-soft);
+    position: relative;
+    padding: 0.25rem 0;
+    transition: color 0.2s;
+}
+.primary-nav a::after {
+    content: ''; position: absolute; left: 0; bottom: -2px;
+    width: 0; height: 2px; background: var(--tomato);
+    transition: width 0.25s ease;
+}
+.primary-nav a:hover { color: var(--ink); }
+.primary-nav a:hover::after { width: 100%; }
+.header-actions { display: flex; gap: 0.5rem; align-items: center; }
+.menu-toggle { display: none; }
+
+/* ---------- Hero ---------- */
+.hero {
+    position: relative;
+    padding: 5rem 1.5rem 7rem;
+    overflow: hidden;
+}
+.hero-inner {
+    max-width: var(--max); margin: 0 auto;
+    display: grid; grid-template-columns: 1.1fr 0.9fr;
+    gap: 4rem; align-items: center;
+    position: relative; z-index: 2;
+}
+.eyebrow {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: var(--font-hand);
+    font-size: 1.4rem;
+    color: var(--lavender-deep);
+    margin-bottom: 1rem;
+}
+.eyebrow::before {
+    content: ''; width: 28px; height: 2px; background: var(--lavender-deep); border-radius: 2px;
+}
+.hero h1 {
+    font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+}
+.hero h1 em {
+    font-style: italic;
+    color: var(--tomato);
+    font-variation-settings: "SOFT" 100;
+}
+.hero-lead {
+    font-size: 1.2rem;
+    color: var(--bark-soft);
+    margin-bottom: 2rem;
+    max-width: 32rem;
+}
+.hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+.hero-meta {
+    display: flex; gap: 2rem; margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px dashed rgba(42, 31, 23, 0.2);
+}
+.hero-meta-item .label {
+    font-family: var(--font-hand);
+    color: var(--lavender-deep);
+    font-size: 1.1rem;
+    display: block;
+}
+.hero-meta-item .value {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--ink);
+}
+
+/* Hero illustration: layered scene */
+.hero-art {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    max-width: 480px;
+    margin-left: auto;
+}
+.hero-art .frame {
+    position: absolute; inset: 0;
+    background: var(--cream-deep);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lift);
+    transform: rotate(-2deg);
+}
+.hero-art .scene {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+}
+.hero-art .badge {
+    position: absolute;
+    bottom: -1rem; right: -1rem;
+    background: var(--sun);
+    color: var(--ink);
+    width: 130px; height: 130px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    font-family: var(--font-hand);
+    font-size: 1.25rem;
+    line-height: 1.1;
+    transform: rotate(8deg);
+    box-shadow: var(--shadow-soft);
+    padding: 1rem;
+    z-index: 3;
+}
+.hero-art .badge strong { font-size: 1.6rem; display: block; font-family: var(--font-display); font-weight: 600; }
+
+/* Hero background decor */
+.hero-decor { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+.hero-decor .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.5;
+}
+.hero-decor .blob-1 { width: 400px; height: 400px; background: var(--sun); top: -100px; left: -100px; opacity: 0.35; }
+.hero-decor .blob-2 { width: 500px; height: 500px; background: var(--sky); bottom: -200px; right: -150px; opacity: 0.4; }
+.hero-decor .leaf {
+    position: absolute;
+    color: var(--moss);
+    opacity: 0.15;
+}
+.hero-decor .leaf-1 { width: 80px; top: 15%; right: 45%; transform: rotate(25deg); }
+.hero-decor .leaf-2 { width: 60px; bottom: 20%; left: 40%; transform: rotate(-40deg); }
+
+/* ---------- Section base ---------- */
+section { position: relative; }
+.section-wrap { max-width: var(--max); margin: 0 auto; padding: 6rem 1.5rem; }
+.section-head { max-width: 42rem; margin-bottom: 3.5rem; }
+.section-head .eyebrow { margin-bottom: 0.75rem; }
+.section-head h2 {
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+.section-head p { font-size: 1.15rem; color: var(--bark-soft); }
+
+/* ---------- Tagline band ---------- */
+.tagline-band {
+    background: var(--lavender-soft);
+    padding: 7rem 1.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+.tagline-band::before,
+.tagline-band::after {
+    content: '';
+    position: absolute;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(138, 111, 158, 0.3), transparent);
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(60%, 480px);
+}
+.tagline-band::before { top: 0; }
+.tagline-band::after { bottom: 0; }
+.tagline-mark {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 2rem;
+    color: var(--lavender-deep);
+    opacity: 0.9;
+}
+.tagline-mark svg { width: 100%; height: 100%; }
+.tagline-quote {
+    font-family: var(--font-hand);
+    font-size: clamp(2rem, 5.5vw, 4rem);
+    line-height: 1.15;
+    color: var(--bark);
+    max-width: 22ch;
+    margin: 0 auto;
+    font-weight: 600;
+}
+.tagline-quote em {
+    color: var(--tomato);
+    font-style: normal;
+}
+.tagline-attribution {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--bark-soft);
+    margin-top: 2rem;
+    letter-spacing: 0.02em;
+}
+.tagline-attribution::before {
+    content: '— ';
+}
+
+/* ---------- Approach ---------- */
+.approach {
+    background: var(--cream-deep);
+    border-radius: 0;
+    position: relative;
+}
+.approach::before {
+    content: '';
+    position: absolute; top: -1px; left: 0; right: 0;
+    height: 40px;
+    background: var(--cream);
+    -webkit-mask: radial-gradient(circle 20px at 20px 0, transparent 98%, black) repeat-x;
+    mask: radial-gradient(circle 20px at 20px 0, transparent 98%, black) repeat-x;
+    mask-size: 40px 40px;
+}
+.approach-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+.principle {
+    background: var(--cream);
+    padding: 2.25rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+.principle:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
+.principle .icon {
+    width: 78px; height: 78px;
+    background: var(--lavender);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.5rem;
+    color: var(--bark);
+    box-shadow: inset 0 -3px 0 rgba(42, 31, 23, 0.08);
+}
+.principle .icon svg { width: 52px; height: 52px; }
+.principle:nth-child(2) .icon { background: var(--tomato); color: var(--cream); }
+.principle:nth-child(3) .icon { background: var(--sun); color: var(--bark); }
+.principle h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+.principle p { color: var(--bark-soft); }
+
+/* ---------- Programs ---------- */
+.programs-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+}
+.program {
+    background: var(--cream);
+    border: 1.5px solid rgba(42, 31, 23, 0.1);
+    border-radius: var(--radius);
+    padding: 2rem 1.75rem;
+    position: relative;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    overflow: hidden;
+}
+.program:hover { transform: translateY(-4px); border-color: var(--lavender-deep); }
+.program:nth-child(2):hover { border-color: var(--tomato); }
+.program:nth-child(4):hover { border-color: var(--moss-deep); }
+.program .age-badge {
+    display: inline-block;
+    font-family: var(--font-hand);
+    font-size: 1.5rem;
+    background: var(--lavender-deep);
+    color: var(--cream);
+    padding: 0.15rem 0.85rem;
+    border-radius: 999px;
+    margin-bottom: 1.25rem;
+    line-height: 1.4;
+}
+.program:nth-child(2) .age-badge { background: var(--tomato); }
+.program:nth-child(3) .age-badge { background: var(--acorn); }
+.program:nth-child(4) .age-badge { background: var(--moss-deep); color: var(--cream); }
+.program h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+.program .stage {
+    font-family: var(--font-hand);
+    color: var(--bark-soft);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+.program p { font-size: 0.98rem; color: var(--bark-soft); margin: 0; }
+.program::after {
+    content: '';
+    position: absolute;
+    width: 100px; height: 100px;
+    background: currentColor;
+    border-radius: 50%;
+    bottom: -50px; right: -50px;
+    opacity: 0.05;
+    color: var(--moss);
+}
+
+/* ---------- Founders strip ---------- */
+.founders {
+    background: linear-gradient(180deg, var(--cream) 0%, var(--cream-deep) 100%);
+}
+.founders-inner {
+    max-width: var(--max); margin: 0 auto;
+    padding: 5rem 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 4rem;
+    align-items: center;
+}
+.founders-photo {
+    aspect-ratio: 4 / 5;
+    border-radius: var(--radius-lg);
+    background: var(--cream-deep);
+    box-shadow: var(--shadow-lift);
+    position: relative;
+    overflow: hidden;
+    transform: rotate(-1.5deg);
+}
+.founders-photo .placeholder {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: var(--bark-soft);
+    font-family: var(--font-hand);
+    font-size: 1.3rem;
+    text-align: center;
+    padding: 2rem;
+    background:
+        repeating-linear-gradient(45deg, transparent 0 12px, rgba(42, 31, 23, 0.03) 12px 13px),
+        var(--cream-deep);
+}
+.founders-photo .placeholder svg { width: 80px; height: 80px; opacity: 0.4; margin-bottom: 1rem; }
+.founders-photo .tape {
+    position: absolute; top: -15px; left: 50%;
+    width: 100px; height: 30px;
+    background: rgba(244, 201, 93, 0.7);
+    transform: translateX(-50%) rotate(-3deg);
+}
+.founders-text .signature {
+    font-family: var(--font-hand);
+    font-size: 1.6rem;
+    color: var(--lavender-deep);
+    margin-top: 1.5rem;
+}
+.founders-text h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+}
+.founders-text p {
+    font-size: 1.1rem;
+    color: var(--bark-soft);
+    margin-bottom: 1.25rem;
+}
+.founders-text .read-more {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    color: var(--tomato);
+    font-weight: 500;
+    margin-top: 0.5rem;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
+    transition: gap 0.2s;
+}
+.founders-text .read-more:hover { gap: 0.85rem; }
+
+/* ---------- Waitlist ---------- */
+.waitlist {
+    background: var(--lavender-deep);
+    color: var(--cream);
+    position: relative;
+    overflow: hidden;
+}
+.waitlist::before, .waitlist::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: var(--lavender);
+    opacity: 0.5;
+}
+.waitlist::before { width: 300px; height: 300px; top: -150px; left: -100px; }
+.waitlist::after { width: 400px; height: 400px; bottom: -200px; right: -150px; opacity: 0.3; }
+.waitlist-inner {
+    max-width: 720px; margin: 0 auto;
+    padding: 6rem 1.5rem;
+    text-align: center;
+    position: relative; z-index: 2;
+}
+.waitlist .eyebrow { color: var(--sun); }
+.waitlist .eyebrow::before { background: var(--sun); }
+.waitlist h2 {
+    color: var(--cream);
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    font-weight: 400;
+    margin-bottom: 1.25rem;
+}
+.waitlist h2 em {
+    font-style: italic;
+    color: var(--sun);
+    font-variation-settings: "SOFT" 100;
+}
+.waitlist p {
+    font-size: 1.15rem;
+    color: rgba(250, 244, 232, 0.8);
+    margin-bottom: 2.5rem;
+}
+.waitlist .btn-secondary {
+    font-size: 1.1rem;
+    padding: 1rem 2rem;
+}
+.waitlist .small {
+    font-family: var(--font-hand);
+    font-size: 1.1rem;
+    color: var(--sun);
+    margin-top: 1.5rem;
+}
+
+/* ---------- Contact ---------- */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+.contact-form {
+    background: var(--cream-deep);
+    padding: 2.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
+}
+.field { margin-bottom: 1.25rem; }
+.field label {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    color: var(--bark);
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+}
+.field input, .field textarea, .field select {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    border: 1.5px solid rgba(42, 31, 23, 0.15);
+    border-radius: var(--radius-sm);
+    background: var(--cream);
+    color: var(--ink);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.field input:focus, .field textarea:focus, .field select:focus {
+    outline: none;
+    border-color: var(--lavender-deep);
+    box-shadow: 0 0 0 3px rgba(200, 182, 212, 0.4);
+}
+.field textarea { resize: vertical; min-height: 120px; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.contact-info h3 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+.contact-detail {
+    display: flex; gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: start;
+}
+.contact-detail .icon {
+    width: 44px; height: 44px;
+    background: var(--cream-deep);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--lavender-deep);
+    flex: none;
+}
+.contact-detail .label {
+    font-family: var(--font-hand);
+    color: var(--lavender-deep);
+    font-size: 1.1rem;
+    line-height: 1.2;
+    display: block;
+}
+.contact-detail .value {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    color: var(--ink);
+}
+.contact-detail .sub { color: var(--bark-soft); font-size: 0.95rem; }
+
+/* ---------- Footer ---------- */
+.site-footer {
+    background: var(--bark);
+    color: rgba(250, 244, 232, 0.75);
+    padding: 4rem 1.5rem 2rem;
+}
+.footer-inner {
+    max-width: var(--max); margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(250, 244, 232, 0.1);
+}
+.footer-brand {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    color: var(--cream);
+    display: block;
+    margin-bottom: 1rem;
+}
+.footer-col h4 {
+    color: var(--lavender);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    font-family: var(--font-hand);
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+.footer-col ul { list-style: none; padding: 0; margin: 0; }
+.footer-col ul li { margin-bottom: 0.5rem; }
+.footer-col a:hover { color: var(--lavender); }
+.footer-link { color: var(--lavender); }
+.footer-bottom {
+    max-width: var(--max); margin: 0 auto;
+    padding-top: 2rem;
+    font-size: 0.9rem;
+    color: rgba(250, 244, 232, 0.5);
+    text-align: center;
+    font-family: var(--font-hand);
+    font-size: 1.05rem;
+}
+
+/* ---------- Reveal animation ---------- */
+.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 960px) {
+    .hero-inner, .founders-inner, .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    .hero-art { margin: 0 auto; max-width: 380px; }
+    .approach-grid { grid-template-columns: 1fr; }
+    .programs-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+    .primary-nav { display: none; }
+}
+@media (max-width: 600px) {
+    body { font-size: 17px; }
+    .section-wrap { padding: 4rem 1.25rem; }
+    .hero { padding: 3rem 1.25rem 5rem; }
+    .programs-grid { grid-template-columns: 1fr; }
+    .field-row { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-meta { flex-direction: column; gap: 1rem; }
+    .header-actions .btn-ghost { display: none; }
+}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<header class="site-header">
+    <div class="header-inner">
+        <a href="/" class="brand" aria-label="Little Oaks — home">
+            <span class="brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="24" cy="32" rx="11" ry="13" fill="#8b5a2b"/>
+                    <path d="M24 14c-3 0-6 0.5-8 1.5 -1 0.5 -1.5 1.5 -1.5 2.5 0 1.5 1 2.5 2 3 2 1 4.5 1.5 7.5 1.5s5.5 -0.5 7.5 -1.5c1 -0.5 2 -1.5 2 -3 0 -1 -0.5 -2 -1.5 -2.5 -2 -1 -5 -1.5 -8 -1.5z" fill="#4a6741"/>
+                    <path d="M24 7c0 2.5 -0.5 5 -0.5 7" stroke="#4a6741" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                    <circle cx="20" cy="30" r="1.2" fill="#5a3818" opacity="0.4"/>
+                    <circle cx="27" cy="34" r="1" fill="#5a3818" opacity="0.4"/>
+                </svg>
+            </span>
+            <span class="brand-text">
+                <span class="brand-name">Little Oaks</span>
+                <span class="brand-tag">Daycare &amp; Montessori</span>
+            </span>
+        </a>
+
+        <nav class="primary-nav" aria-label="Primary">
+            <a href="#approach">Our Approach</a>
+            <a href="#programs">Programs</a>
+            <a href="#about">About Us</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="header-actions">
+            <!-- <a href="#waitlist" class="btn btn-primary btn-sm">Join Waitlist</a> -->
+            <!-- <a href="/login" class="btn btn-ghost btn-sm">Login</a> -->
+        </div>
+    </div>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-decor">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <svg class="leaf leaf-1" viewBox="0 0 100 100"><path d="M50 5 C 75 25, 85 55, 50 95 C 15 55, 25 25, 50 5 Z M50 5 L50 90" fill="currentColor"/></svg>
+        <svg class="leaf leaf-2" viewBox="0 0 100 100"><path d="M50 5 C 75 25, 85 55, 50 95 C 15 55, 25 25, 50 5 Z" fill="currentColor"/></svg>
+    </div>
+
+    <div class="hero-inner">
+        <div class="hero-text">
+            <span class="eyebrow">A small Waterloo daycare</span>
+            <h1>Where little ones grow <em>roots</em> &amp; reach for the sky.</h1>
+            <p class="hero-lead">
+                Little Oaks is a family-run Montessori daycare on Alexandria Avenue, caring for children ages 0–4. Calm rooms, real materials, and grown-ups who actually know your child by name.
+            </p>
+            <div class="hero-cta">
+                <!-- <a href="#waitlist" class="btn btn-primary">Join the Waitlist</a> -->
+                <a href="#approach" class="btn btn-ghost">See Our Approach</a>
+            </div>
+            <div class="hero-meta">
+                <div class="hero-meta-item">
+                    <span class="label">Ages</span>
+                    <span class="value">0 – 4 years</span>
+                </div>
+                <div class="hero-meta-item">
+                    <span class="label">Where</span>
+                    <span class="value">Waterloo, ON</span>
+                </div>
+                <div class="hero-meta-item">
+                    <span class="label">Style</span>
+                    <span class="value">Montessori-inspired</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-art" aria-hidden="true">
+            <div class="frame">
+                <!-- Illustrated scene: a tree, sun, child playing -->
+                <svg class="scene" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#fce8b8"/>
+                            <stop offset="100%" stop-color="#f3ead6"/>
+                        </linearGradient>
+                        <radialGradient id="sun" cx="50%" cy="50%">
+                            <stop offset="0%" stop-color="#fde08a"/>
+                            <stop offset="100%" stop-color="#f4c95d"/>
+                        </radialGradient>
+                    </defs>
+                    <rect width="400" height="500" fill="url(#sky)"/>
+
+                    <!-- Sun -->
+                    <circle cx="320" cy="120" r="55" fill="url(#sun)"/>
+                    <g stroke="#f4c95d" stroke-width="3" stroke-linecap="round" opacity="0.6">
+                        <line x1="320" y1="40" x2="320" y2="55"/>
+                        <line x1="380" y1="80" x2="370" y2="90"/>
+                        <line x1="400" y1="120" x2="385" y2="120"/>
+                        <line x1="380" y1="160" x2="370" y2="150"/>
+                        <line x1="260" y1="80" x2="270" y2="90"/>
+                        <line x1="240" y1="120" x2="255" y2="120"/>
+                        <line x1="260" y1="160" x2="270" y2="150"/>
+                    </g>
+
+                    <!-- Hills -->
+                    <path d="M0 380 Q 100 350, 200 370 T 400 360 L 400 500 L 0 500 Z" fill="#a8c8a0"/>
+                    <path d="M0 420 Q 120 400, 250 415 T 400 410 L 400 500 L 0 500 Z" fill="#7da06f"/>
+
+                    <!-- Big oak tree -->
+                    <rect x="80" y="280" width="22" height="140" fill="#7a4a2a" rx="3"/>
+                    <path d="M85 350 Q 60 340, 55 320" stroke="#7a4a2a" stroke-width="6" fill="none" stroke-linecap="round"/>
+                    <path d="M97 330 Q 120 320, 130 305" stroke="#7a4a2a" stroke-width="6" fill="none" stroke-linecap="round"/>
+                    <ellipse cx="91" cy="240" rx="80" ry="65" fill="#4a6741"/>
+                    <ellipse cx="60" cy="220" rx="40" ry="35" fill="#5a7751"/>
+                    <ellipse cx="125" cy="225" rx="45" ry="38" fill="#5a7751"/>
+                    <ellipse cx="91" cy="210" rx="55" ry="40" fill="#6a8761"/>
+                    <!-- Acorns hanging -->
+                    <g>
+                        <ellipse cx="50" cy="290" rx="5" ry="7" fill="#8b5a2b"/>
+                        <ellipse cx="50" cy="285" rx="5" ry="3" fill="#4a6741"/>
+                        <ellipse cx="135" cy="295" rx="5" ry="7" fill="#8b5a2b"/>
+                        <ellipse cx="135" cy="290" rx="5" ry="3" fill="#4a6741"/>
+                    </g>
+
+                    <!-- Child silhouette playing with blocks -->
+                    <g transform="translate(220, 350)">
+                        <!-- blocks -->
+                        <rect x="-10" y="50" width="30" height="30" fill="#d65a3a" rx="3"/>
+                        <rect x="25" y="50" width="30" height="30" fill="#a8c8d8" rx="3"/>
+                        <rect x="7" y="20" width="30" height="30" fill="#f4c95d" rx="3"/>
+                        <!-- child -->
+                        <circle cx="80" cy="20" r="22" fill="#f5d7b8"/>
+                        <path d="M58 18 Q 80 -5, 102 18 Q 102 5, 80 -2 Q 58 5, 58 18" fill="#7a4a2a"/>
+                        <rect x="62" y="40" width="36" height="40" fill="#d65a3a" rx="6"/>
+                        <rect x="64" y="78" width="14" height="22" fill="#3d4a5a" rx="3"/>
+                        <rect x="82" y="78" width="14" height="22" fill="#3d4a5a" rx="3"/>
+                        <!-- arm reaching -->
+                        <path d="M68 50 Q 50 60, 35 70" stroke="#f5d7b8" stroke-width="9" stroke-linecap="round" fill="none"/>
+                        <circle cx="33" cy="72" r="6" fill="#f5d7b8"/>
+                    </g>
+
+                    <!-- Birds -->
+                    <path d="M180 100 Q 190 92, 200 100 Q 210 92, 220 100" stroke="#2a1f17" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.5"/>
+                    <path d="M250 70 Q 258 64, 266 70 Q 274 64, 282 70" stroke="#2a1f17" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.4"/>
+                </svg>
+            </div>
+            <!-- <div class="badge">
+                <strong>Now</strong>
+                taking 2026 applications
+            </div> -->
+        </div>
+    </div>
+</section>
+
+<!-- APPROACH -->
+<section class="approach" id="approach">
+    <div class="section-wrap">
+        <div class="section-head reveal">
+            <span class="eyebrow">Our approach</span>
+            <h2>Quiet rooms, real work, and respect for the child.</h2>
+            <p>Montessori isn't a brand we paste on the door — it's how we set the tables, how we speak to children, and how we let them do things for themselves.</p>
+        </div>
+
+        <div class="approach-grid">
+            <div class="principle reveal">
+                <div class="icon" aria-hidden="true">
+                    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Tiny chair -->
+                        <path d="M14 28 Q 14 20, 18 19 L 26 19 Q 30 20, 30 28" />
+                        <line x1="14" y1="28" x2="30" y2="28" stroke-width="3"/>
+                        <line x1="16" y1="28" x2="16" y2="44"/>
+                        <line x1="28" y1="28" x2="28" y2="44"/>
+                        <path d="M14 36 Q 22 38, 30 36"/>
+                        <!-- Watering can to the right -->
+                        <path d="M38 32 L 38 44 Q 38 48, 42 48 L 52 48 Q 56 48, 56 44 L 56 32 Z"/>
+                        <path d="M38 32 L 56 32 L 53 28 L 41 28 Z"/>
+                        <path d="M56 36 L 60 34 L 60 30"/>
+                        <circle cx="60" cy="30" r="0.8" fill="currentColor"/>
+                        <circle cx="58.5" cy="28" r="0.6" fill="currentColor"/>
+                        <circle cx="61" cy="28" r="0.6" fill="currentColor"/>
+                        <!-- Little squiggle "floor" -->
+                        <path d="M10 52 Q 18 50, 26 52 T 42 52 T 58 52" opacity="0.4"/>
+                    </svg>
+                </div>
+                <h3>Prepared Environment</h3>
+                <p>Low shelves, real glass cups, child-sized brooms. Everything is sized so children can do it themselves — and that's the point.</p>
+            </div>
+
+            <div class="principle reveal">
+                <div class="icon" aria-hidden="true">
+                    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Butterfly up top -->
+                        <g transform="translate(42, 14)">
+                            <ellipse cx="-4" cy="0" rx="5" ry="4"/>
+                            <ellipse cx="4" cy="0" rx="5" ry="4"/>
+                            <ellipse cx="-4" cy="6" rx="3.5" ry="3"/>
+                            <ellipse cx="4" cy="6" rx="3.5" ry="3"/>
+                            <line x1="0" y1="-3" x2="0" y2="8"/>
+                            <line x1="0" y1="-3" x2="-2" y2="-6"/>
+                            <line x1="0" y1="-3" x2="2" y2="-6"/>
+                        </g>
+                        <!-- Curved dotted gaze line from child to butterfly -->
+                        <path d="M22 28 Q 30 18, 40 18" stroke-dasharray="1 4" opacity="0.6"/>
+                        <!-- Child body -->
+                        <circle cx="22" cy="32" r="8"/>
+                        <!-- Tuft of hair -->
+                        <path d="M16 28 Q 22 22, 28 28"/>
+                        <path d="M22 24 Q 24 20, 26 22" stroke-width="1.8"/>
+                        <!-- Eyes (looking up) -->
+                        <circle cx="20" cy="31" r="0.8" fill="currentColor"/>
+                        <circle cx="24" cy="31" r="0.8" fill="currentColor"/>
+                        <!-- Body -->
+                        <path d="M16 38 Q 14 50, 16 56 L 28 56 Q 30 50, 28 38"/>
+                        <!-- Arm reaching up -->
+                        <path d="M28 40 Q 34 32, 36 24"/>
+                        <!-- Ground squiggle -->
+                        <path d="M8 58 Q 16 56, 24 58 T 40 58 T 56 58" opacity="0.4"/>
+                    </svg>
+                </div>
+                <h3>Follow the Child</h3>
+                <p>We watch closely and meet each child where they are. A two-year-old obsessed with pouring water gets all the pouring work in the world.</p>
+            </div>
+
+            <div class="principle reveal">
+                <div class="icon" aria-hidden="true">
+                    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Sun in the corner -->
+                        <circle cx="48" cy="18" r="7"/>
+                        <line x1="48" y1="6" x2="48" y2="9"/>
+                        <line x1="56" y1="10" x2="54" y2="12"/>
+                        <line x1="60" y1="18" x2="57" y2="18"/>
+                        <line x1="56" y1="26" x2="54" y2="24"/>
+                        <line x1="40" y1="10" x2="42" y2="12"/>
+                        <!-- Smile on sun -->
+                        <path d="M45 19 Q 48 21, 51 19" stroke-width="1.8"/>
+                        <circle cx="46" cy="17" r="0.6" fill="currentColor"/>
+                        <circle cx="50" cy="17" r="0.6" fill="currentColor"/>
+                        <!-- Snail body -->
+                        <path d="M8 50 Q 12 44, 22 44 L 36 44 Q 42 44, 42 50 L 10 50 Z"/>
+                        <!-- Snail shell (spiral) -->
+                        <circle cx="28" cy="38" r="9"/>
+                        <circle cx="28" cy="38" r="6"/>
+                        <circle cx="28" cy="38" r="3"/>
+                        <!-- Snail eye stalks -->
+                        <path d="M14 44 L 12 36"/>
+                        <path d="M18 44 L 18 34"/>
+                        <circle cx="12" cy="35" r="1" fill="currentColor"/>
+                        <circle cx="18" cy="33" r="1" fill="currentColor"/>
+                        <!-- Trail behind -->
+                        <path d="M44 52 Q 50 54, 56 52" stroke-dasharray="2 3" opacity="0.5"/>
+                    </svg>
+                </div>
+                <h3>Unhurried Days</h3>
+                <p>Long stretches of uninterrupted play. We don't rush children from station to station every fifteen minutes — concentration is a muscle, and we let it grow.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROGRAMS -->
+<section id="programs">
+    <div class="section-wrap">
+        <div class="section-head reveal">
+            <span class="eyebrow">Programs by age</span>
+            <h2>Care that grows with your child.</h2>
+            <p>Four distinct rooms for four distinct stages. Small group sizes, consistent caregivers, and plenty of time outside.</p>
+        </div>
+
+        <div class="programs-grid">
+            <div class="program reveal">
+                <span class="age-badge">0 – 12 mo</span>
+                <span class="stage">Sprouts</span>
+                <h3>Infant Room</h3>
+                <p>Gentle routines, lots of being held, tummy time on real wool rugs. Sleep and feeding on your baby's schedule, never ours.</p>
+            </div>
+
+            <div class="program reveal">
+                <span class="age-badge">1 – 2 yrs</span>
+                <span class="stage">Saplings</span>
+                <h3>Young Toddler</h3>
+                <p>Walking, climbing, first words. We help with dressing and eating without rushing — the goal is independence, one button at a time.</p>
+            </div>
+
+            <div class="program reveal">
+                <span class="age-badge">2 – 3 yrs</span>
+                <span class="stage">Little Oaks</span>
+                <h3>Older Toddler</h3>
+                <p>Practical life takes off: pouring, sweeping, washing the snack dishes. Language explodes. So does the laundry.</p>
+            </div>
+
+            <div class="program reveal">
+                <span class="age-badge">3 – 4 yrs</span>
+                <span class="stage">Mighty Oaks</span>
+                <h3>Preschool</h3>
+                <p>You're not mighty when you get here, but you're mighty when you leave. The classic Montessori materials — the pink tower, sandpaper letters, the moveable alphabet. Reading and counting arrive when the child is ready.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TAGLINE BAND -->
+<section class="tagline-band reveal" aria-label="Our promise">
+    <div class="tagline-mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <!-- Small acorn motif -->
+            <ellipse cx="32" cy="40" rx="13" ry="16" fill="currentColor" opacity="0.9"/>
+            <path d="M32 22c-4 0-7.5 0.5-10 1.8 -1.2 0.6 -1.8 1.6 -1.8 2.6 0 1.5 1 2.5 2.2 3 2.2 1 5.6 1.5 9.6 1.5s7.4 -0.5 9.6 -1.5c1.2 -0.5 2.2 -1.5 2.2 -3 0 -1 -0.6 -2 -1.8 -2.6 -2.5 -1.3 -6 -1.8 -10 -1.8z" fill="currentColor"/>
+            <path d="M32 14c0 3 -0.5 6 -0.5 8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+    </div>
+    <p class="tagline-quote">You're not <em>mighty</em> when you get here, but you're <em>mighty</em> when you leave.</p>
+    <p class="tagline-attribution">a small promise from us to your child</p>
+</section>
+
+<!-- FOUNDERS / ABOUT TEASER -->
+<section class="founders" id="about">
+    <div class="founders-inner">
+        <div class="founders-photo reveal">
+            <div class="tape" aria-hidden="true"></div>
+            <div class="placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <span>A photo of us<br>will live here.</span>
+            </div>
+        </div>
+
+        <div class="founders-text reveal">
+            <span class="eyebrow">The family behind Little Oaks</span>
+            <h2>Hi — we're a family business, not a chain.</h2>
+            <p>
+                Little Oaks is run by my wife and me. She's the heart of the daycare and our director — the one who actually knows your child's favourite song and which sock they prefer. I handle the IT side from the background.
+            </p>
+            <p>
+                We started this because we wanted somewhere we'd happily send our own kids: small, quiet, where the people don't rotate every six months and where the day isn't ruled by screens or the clock.
+            </p>
+            <p class="signature">— with care, the Little Oaks family</p>
+            <a href="/about" class="read-more">Read our full story <span aria-hidden="true">→</span></a>
+        </div>
+    </div>
+</section>
+
+<!-- WAITLIST -->
+<!-- <section class="waitlist" id="waitlist">
+    <div class="waitlist-inner">
+        <span class="eyebrow">Spaces fill up</span>
+        <h2>Join our <em>waitlist</em>.</h2>
+        <p>We keep our rooms intentionally small, which means we can only take a limited number of new families each year. The earlier we know your child is on the way, the better we can plan for them.</p>
+        <a href="mailto:hello@littleoaks.ca?subject=Waitlist%20Inquiry%20—%20Little%20Oaks&body=Hi%20Little%20Oaks%2C%0A%0AI'd%20like%20to%20add%20my%20child%20to%20your%20waitlist.%0A%0A•%20Parent%20name%3A%20%0A•%20Child's%20name%3A%20%0A•%20Child's%20date%20of%20birth%3A%20%0A•%20Hoped-for%20start%20date%3A%20%0A•%20Phone%20number%3A%20%0A•%20Anything%20you'd%20like%20us%20to%20know%3A%20%0A%0AThank%20you!" class="btn btn-secondary">
+            Email us to join
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <p class="small">We'll get back to you within a couple of days.</p>
+    </div>
+</section> -->
+
+<!-- CONTACT -->
+<section id="contact">
+    <div class="section-wrap">
+        <div class="section-head reveal">
+            <span class="eyebrow">Say hello</span>
+            <h2>Come for a visit.</h2>
+            <p>The best way to know if we're a fit is to walk through the door. Send us a note and we'll find a time.</p>
+        </div>
+
+        <div class="contact-grid">
+            <!-- <form class="contact-form reveal" action="mailto:hello@littleoaks.ca" method="post" enctype="text/plain">
+                <div class="field-row">
+                    <div class="field">
+                        <label for="name">Your name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="field">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="topic">What's this about?</label>
+                    <select id="topic" name="topic">
+                        <option>A general question</option>
+                        <option>Booking a tour</option>
+                        <option>Joining the waitlist</option>
+                        <option>Something else</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="message">Your message</label>
+                    <textarea id="message" name="message" rows="5"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form> -->
+
+            <div class="contact-info reveal">
+                <h3>Find us</h3>
+
+                <div class="contact-detail">
+                    <div class="icon" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </div>
+                    <div>
+                        <span class="label">Visit</span>
+                        <span class="value">68 Alexandria Avenue</span>
+                        <div class="sub">Waterloo, Ontario</div>
+                    </div>
+                </div>
+
+                <div class="contact-detail">
+                    <div class="icon" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    </div>
+                    <div>
+                        <span class="label">Email</span>
+                        <span class="value">hello@littleoaks.ca</span>
+                    </div>
+                </div>
+
+                <div class="contact-detail">
+                    <div class="icon" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <div>
+                        <span class="label">Hours</span>
+                        <span class="value">Monday – Friday</span>
+                        <div class="sub">7:30 am – 5:30 pm</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-col">
+            <span class="footer-brand">Little Oaks Daycare &amp; Montessori</span>
+            <p>68 Alexandria Avenue<br>Waterloo, Ontario<br>hello@littleoaks.ca</p>
+        </div>
+        <div class="footer-col">
+            <h4>Explore</h4>
+            <ul>
+                <li><a href="#approach">Our Approach</a></li>
+                <li><a href="#programs">Programs</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Fine print</h4>
+            <ul>
+                <li><a href="/privacy">Privacy Policy</a></li>
+                <li><a href="/terms">Terms of Use</a></li>
+                <!-- <li><a href="/login">Parent Login</a></li> -->
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        © <span id="year"></span> Little Oaks Daycare &amp; Montessori. A small family business in Waterloo.
+    </div>
+</footer>
+
+<script>
+// Reveal on scroll
+const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            e.target.classList.add('in');
+            io.unobserve(e.target);
+        }
+    });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Year in footer
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
