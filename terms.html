@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Use — Little Oaks Daycare & Montessori</title>
+<meta name="description" content="Terms of Use for the Little Oaks Daycare & Montessori website.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Newsreader:opsz,wght@6..72,300..600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ---------- Tokens ---------- */
+:root {
+    --cream: #faf4e8;
+    --cream-deep: #f3ead6;
+    --bark: #2a1f17;
+    --bark-soft: #4a3a2c;
+    --lavender: #b8a4d0;
+    --lavender-deep: #6b5478;
+    --lavender-soft: #ebe4f1;
+    --moss: #7a8e6f;
+    --tomato: #d65a3a;
+    --sun: #f4c95d;
+    --ink: #1a1410;
+
+    --shadow-soft: 0 1px 2px rgba(42, 31, 23, 0.04), 0 8px 24px rgba(42, 31, 23, 0.06);
+
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Newsreader', Georgia, serif;
+    --font-hand: 'Caveat', cursive;
+
+    --radius-sm: 8px;
+    --radius: 16px;
+    --radius-lg: 28px;
+
+    --max: 1200px;
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.65;
+    color: var(--bark);
+    background: var(--cream);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; border: none; background: none; }
+
+h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0;
+    color: var(--ink);
+    font-variation-settings: "SOFT" 50;
+}
+
+.skip-link {
+    position: absolute; top: -100px; left: 1rem;
+    background: var(--ink); color: var(--cream); padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm); z-index: 100;
+}
+.skip-link:focus { top: 1rem; }
+
+/* ---------- Buttons ---------- */
+.btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 1.5rem;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 1rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    white-space: nowrap;
+}
+.btn-sm { padding: 0.55rem 1.1rem; font-size: 0.95rem; }
+.btn-primary {
+    background: var(--lavender-deep);
+    color: var(--cream);
+    box-shadow: 0 2px 0 #4a3956;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 0 #4a3956; background: #5a466a; }
+
+/* ---------- Header ---------- */
+.site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(250, 244, 232, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(42, 31, 23, 0.08);
+}
+.header-inner {
+    max-width: var(--max); margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 1.5rem; gap: 2rem;
+}
+.brand { display: flex; align-items: center; gap: 0.75rem; }
+.brand-mark { width: 42px; height: 42px; flex: none; }
+.brand-mark svg { width: 100%; height: 100%; }
+.brand-text { display: flex; flex-direction: column; line-height: 1; }
+.brand-name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.35rem;
+    color: var(--ink);
+    font-variation-settings: "SOFT" 80;
+}
+.brand-tag {
+    font-family: var(--font-hand);
+    font-size: 1rem;
+    color: var(--lavender-deep);
+    margin-top: 2px;
+}
+.primary-nav { display: flex; gap: 1.75rem; }
+.primary-nav a {
+    font-size: 0.98rem;
+    color: var(--bark-soft);
+    position: relative;
+    padding: 0.25rem 0;
+    transition: color 0.2s;
+}
+.primary-nav a::after {
+    content: ''; position: absolute; left: 0; bottom: -2px;
+    width: 0; height: 2px; background: var(--tomato);
+    transition: width 0.25s ease;
+}
+.primary-nav a:hover { color: var(--ink); }
+.primary-nav a:hover::after { width: 100%; }
+.header-actions { display: flex; gap: 0.5rem; align-items: center; }
+
+.eyebrow {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: var(--font-hand);
+    font-size: 1.4rem;
+    color: var(--lavender-deep);
+    margin-bottom: 1rem;
+}
+.eyebrow::before {
+    content: ''; width: 28px; height: 2px; background: var(--lavender-deep); border-radius: 2px;
+}
+
+/* ---------- Page Hero ---------- */
+.page-hero {
+    background: var(--cream-deep);
+    padding: 5rem 1.5rem 4rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(42, 31, 23, 0.07);
+}
+.page-hero-inner { max-width: 640px; margin: 0 auto; }
+.page-hero h1 {
+    font-size: clamp(2.2rem, 5vw, 3.75rem);
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+.page-hero p {
+    font-size: 1.1rem;
+    color: var(--bark-soft);
+}
+.page-hero .effective {
+    font-family: var(--font-hand);
+    font-size: 1.1rem;
+    color: var(--bark-soft);
+    margin-top: 0.5rem;
+}
+
+/* ---------- Prose ---------- */
+.prose-wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 5rem 1.5rem 6rem;
+}
+.prose-wrap h2 {
+    font-size: 1.65rem;
+    font-weight: 400;
+    margin: 3rem 0 1rem;
+    padding-top: 3rem;
+    border-top: 1px dashed rgba(42, 31, 23, 0.15);
+}
+.prose-wrap h2:first-of-type {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+}
+.prose-wrap h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 1.75rem 0 0.6rem;
+    color: var(--bark);
+}
+.prose-wrap p {
+    color: var(--bark-soft);
+    margin: 0 0 1.1rem;
+}
+.prose-wrap ul {
+    color: var(--bark-soft);
+    padding-left: 1.5rem;
+    margin: 0 0 1.1rem;
+}
+.prose-wrap li { margin-bottom: 0.4rem; }
+.prose-wrap a {
+    color: var(--lavender-deep);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+.prose-wrap a:hover { color: var(--tomato); }
+.contact-block {
+    background: var(--lavender-soft);
+    border-radius: var(--radius);
+    padding: 2rem 2.5rem;
+    margin-top: 3rem;
+}
+.contact-block h3 { margin-top: 0; margin-bottom: 0.75rem; }
+
+/* ---------- Footer ---------- */
+.site-footer {
+    background: var(--bark);
+    color: rgba(250, 244, 232, 0.75);
+    padding: 4rem 1.5rem 2rem;
+}
+.footer-inner {
+    max-width: var(--max); margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(250, 244, 232, 0.1);
+}
+.footer-brand {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    color: var(--cream);
+    display: block;
+    margin-bottom: 1rem;
+}
+.footer-col h4 {
+    color: var(--lavender);
+    margin-bottom: 1rem;
+    font-family: var(--font-hand);
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+.footer-col ul { list-style: none; padding: 0; margin: 0; }
+.footer-col ul li { margin-bottom: 0.5rem; }
+.footer-col a:hover { color: var(--lavender); }
+.footer-bottom {
+    max-width: var(--max); margin: 0 auto;
+    padding-top: 2rem;
+    color: rgba(250, 244, 232, 0.5);
+    text-align: center;
+    font-family: var(--font-hand);
+    font-size: 1.05rem;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 960px) {
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+    .primary-nav { display: none; }
+}
+@media (max-width: 600px) {
+    body { font-size: 17px; }
+    .prose-wrap { padding: 3rem 1.25rem 4rem; }
+    .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<header class="site-header">
+    <div class="header-inner">
+        <a href="/" class="brand" aria-label="Little Oaks — home">
+            <span class="brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="24" cy="32" rx="11" ry="13" fill="#8b5a2b"/>
+                    <path d="M24 14c-3 0-6 0.5-8 1.5 -1 0.5 -1.5 1.5 -1.5 2.5 0 1.5 1 2.5 2 3 2 1 4.5 1.5 7.5 1.5s5.5 -0.5 7.5 -1.5c1 -0.5 2 -1.5 2 -3 0 -1 -0.5 -2 -1.5 -2.5 -2 -1 -5 -1.5 -8 -1.5z" fill="#4a6741"/>
+                    <path d="M24 7c0 2.5 -0.5 5 -0.5 7" stroke="#4a6741" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                    <circle cx="20" cy="30" r="1.2" fill="#5a3818" opacity="0.4"/>
+                    <circle cx="27" cy="34" r="1" fill="#5a3818" opacity="0.4"/>
+                </svg>
+            </span>
+            <span class="brand-text">
+                <span class="brand-name">Little Oaks</span>
+                <span class="brand-tag">Daycare &amp; Montessori</span>
+            </span>
+        </a>
+
+        <nav class="primary-nav" aria-label="Primary">
+            <a href="/#approach">Our Approach</a>
+            <a href="/#programs">Programs</a>
+            <a href="/about">About Us</a>
+            <a href="/#contact">Contact</a>
+        </nav>
+
+        <div class="header-actions">
+            <!-- <a href="/#waitlist" class="btn btn-primary btn-sm">Join Waitlist</a> -->
+            <!-- <a href="/login" class="btn btn-ghost btn-sm">Login</a> -->
+        </div>
+    </div>
+</header>
+
+<main id="main">
+
+<section class="page-hero">
+    <div class="page-hero-inner">
+        <span class="eyebrow">Fine print</span>
+        <h1>Terms of Use</h1>
+        <p>The terms that govern your use of this website.</p>
+        <p class="effective">Effective date: May 28, 2026</p>
+    </div>
+</section>
+
+<div class="prose-wrap">
+
+    <h2>About these terms</h2>
+    <p>These Terms of Use govern your access to and use of the Little Oaks Daycare &amp; Montessori website at <strong>littleoaks.ca</strong> (the "Website"). By using this Website, you agree to these terms.</p>
+    <p>These terms apply to the Website only. They do not constitute or replace any service agreement, enrollment contract, or fee arrangement between Little Oaks and enrolled families. Those matters are governed by separate written agreements.</p>
+    <p>If you do not agree to these terms, please do not use this Website.</p>
+
+    <h2>Information on this website</h2>
+    <p>The information on this Website is provided for general informational purposes only. While we make reasonable efforts to keep it current and accurate, we cannot guarantee that all information is up to date at all times. Programs, fees, hours, and availability are subject to change.</p>
+    <p>Nothing on this Website constitutes professional advice of any kind — medical, legal, educational, or otherwise. Please contact us directly for information specific to your child or family.</p>
+
+    <h2>Acceptable use</h2>
+    <p>You may use this Website for lawful purposes only. You agree not to:</p>
+    <ul>
+        <li>Use the Website in any way that violates applicable federal, provincial, or local law</li>
+        <li>Attempt to gain unauthorized access to any part of the Website or its supporting systems</li>
+        <li>Transmit any material that is harmful, offensive, or otherwise objectionable</li>
+        <li>Use automated means (bots, scrapers, crawlers) to collect data from this Website without our written permission</li>
+        <li>Impersonate Little Oaks or any person associated with us</li>
+    </ul>
+
+    <h2>Intellectual property</h2>
+    <p>All content on this Website — including text, illustrations, graphics, the Little Oaks name, and the brand mark — is owned by or licensed to Little Oaks Daycare &amp; Montessori and is protected by Canadian copyright law.</p>
+    <p>You may view and print pages from this Website for your own personal, non-commercial use. You may not reproduce, distribute, republish, or use any content for commercial purposes without our written permission.</p>
+
+    <h2>Third-party links</h2>
+    <p>This Website may contain links to external websites for your convenience. We do not control those sites and are not responsible for their content, accuracy, or privacy practices. A link does not indicate our endorsement of that site or its operator.</p>
+
+    <h2>Disclaimer of warranties</h2>
+    <p>This Website is provided on an "as is" and "as available" basis without warranties of any kind, express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, or non-infringement. We do not warrant that the Website will be uninterrupted, error-free, or free of viruses or other harmful components.</p>
+
+    <h2>Limitation of liability</h2>
+    <p>To the fullest extent permitted by Ontario and Canadian law, Little Oaks Daycare &amp; Montessori, its owners, staff, and agents shall not be liable for any direct, indirect, incidental, consequential, or special damages arising from your use of or inability to use this Website, even if we have been advised of the possibility of such damages.</p>
+
+    <h2>Governing law</h2>
+    <p>These Terms of Use are governed by and construed in accordance with the laws of the Province of Ontario and the federal laws of Canada applicable therein. Any dispute arising from these terms shall be subject to the exclusive jurisdiction of the courts of Ontario.</p>
+
+    <h2>Changes to these terms</h2>
+    <p>We may update these Terms of Use at any time. When we do, we will revise the effective date at the top of this page. Continued use of the Website after any changes constitutes your acceptance of the revised terms.</p>
+
+    <div class="contact-block">
+        <h3>Questions about these terms</h3>
+        <p>If you have any questions about these Terms of Use, please contact us:</p>
+        <p>
+            <strong>Little Oaks Daycare &amp; Montessori</strong><br>
+            68 Alexandria Avenue, Waterloo, Ontario<br>
+            <a href="mailto:hello@littleoaks.ca">hello@littleoaks.ca</a>
+        </p>
+    </div>
+
+</div>
+
+</main>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-col">
+            <span class="footer-brand">Little Oaks Daycare &amp; Montessori</span>
+            <p>68 Alexandria Avenue<br>Waterloo, Ontario<br>hello@littleoaks.ca</p>
+        </div>
+        <div class="footer-col">
+            <h4>Explore</h4>
+            <ul>
+                <li><a href="/#approach">Our Approach</a></li>
+                <li><a href="/#programs">Programs</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/#contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Fine print</h4>
+            <ul>
+                <li><a href="/privacy">Privacy Policy</a></li>
+                <li><a href="/terms">Terms of Use</a></li>
+                <!-- <li><a href="/login">Parent Login</a></li> -->
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; <span id="year"></span> Little Oaks Daycare &amp; Montessori. A small family business in Waterloo.
+    </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
