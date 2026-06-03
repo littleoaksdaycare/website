@@ -1,0 +1,21 @@
+<svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Little Oaks Child Care &amp; Montessori">
+  <defs>
+    <style>
+      .name { font-family: 'Fraunces', 'Georgia', serif; font-weight: 500; font-size: 64px; fill: #2a1f17; }
+      .tag  { font-family: 'Caveat', 'Brush Script MT', cursive; font-weight: 500; font-size: 32px; fill: #6b5478; }
+    </style>
+  </defs>
+  <!-- Mark on left -->
+  <g transform="translate(0,0)">
+    <g transform="rotate(8 100 100)">
+      <circle cx="100" cy="100" r="88" fill="none" stroke="#6b5478" stroke-width="3"/>
+      <ellipse cx="100" cy="118" rx="34" ry="42" fill="#8b5a2b"/>
+      <path d="M66 82 Q 66 70, 73 68 L 127 68 Q 134 70, 134 82 Q 134 89, 100 89 Q 66 89, 66 82 Z" fill="#4a5e42"/>
+      <path d="M100 68 Q 100 60, 103 56" stroke="#4a5e42" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M103 56 Q 110 50, 116 53 Q 119 58, 114 63 Q 109 65, 105 62 Z" fill="#7a8e6f"/>
+    </g>
+  </g>
+  <!-- Wordmark on right -->
+  <text x="220" y="100" class="name">Little Oaks</text>
+  <text x="220" y="138" class="tag">Child Care &amp; Montessori</text>
+</svg>
