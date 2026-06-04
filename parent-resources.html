@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Terms of Use — Little Oaks Child Care Centre & Montessori</title>
-<meta name="description" content="Terms of Use for the Little Oaks Child Care Centre & Montessori website.">
+<title>Parent Resources — Little Oaks Child Care Centre & Montessori</title>
+<meta name="description" content="Resources for Little Oaks families — parenting tip sheets, helpful links, and tools to support your child's growth at home and at our centre.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,10 +20,10 @@
 
 <!-- Open Graph / Social -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://littleoakswaterloo.ca/terms">
+<meta property="og:url" content="https://littleoakswaterloo.ca/parent-resources">
 <meta property="og:site_name" content="Little Oaks Child Care Centre & Montessori">
-<meta property="og:title" content="Terms of Use — Little Oaks Child Care Centre & Montessori">
-<meta property="og:description" content="Terms of Use for the Little Oaks Child Care Centre & Montessori website.">
+<meta property="og:title" content="Parent Resources — Little Oaks Child Care Centre & Montessori">
+<meta property="og:description" content="Resources for Little Oaks families — parenting tip sheets, helpful links, and the parent communication app.">
 <meta property="og:image" content="https://littleoakswaterloo.ca/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://littleoakswaterloo.ca/og-image.png">
@@ -39,11 +39,13 @@
     --lavender-deep: #6b5478;
     --lavender-soft: #ebe4f1;
     --moss: #7a8e6f;
+    --moss-deep: #4a5e42;
     --tomato: #d65a3a;
     --sun: #f4c95d;
     --ink: #1a1410;
 
     --shadow-soft: 0 1px 2px rgba(42, 31, 23, 0.04), 0 8px 24px rgba(42, 31, 23, 0.06);
+    --shadow-lift: 0 2px 4px rgba(42, 31, 23, 0.06), 0 16px 40px rgba(42, 31, 23, 0.10);
 
     --font-display: 'Fraunces', Georgia, serif;
     --font-body: 'Newsreader', Georgia, serif;
@@ -180,64 +182,168 @@ h1, h2, h3, h4 {
     font-weight: 400;
     margin-bottom: 1rem;
 }
-.page-hero p {
-    font-size: 1.1rem;
-    color: var(--bark-soft);
+.page-hero h1 em {
+    font-style: italic;
+    color: var(--tomato);
+    font-variation-settings: "SOFT" 100;
 }
-.page-hero .effective {
-    font-family: var(--font-hand);
-    font-size: 1.1rem;
+.page-hero p {
+    font-size: 1.2rem;
     color: var(--bark-soft);
-    margin-top: 0.5rem;
+    max-width: 34rem;
+    margin: 0 auto;
 }
 
-/* ---------- Prose ---------- */
-.prose-wrap {
-    max-width: 760px;
+/* ---------- Content ---------- */
+.content-wrap {
+    max-width: var(--max);
     margin: 0 auto;
     padding: 5rem 1.5rem 6rem;
 }
-.prose-wrap h2 {
-    font-size: 1.65rem;
+
+/* ---------- App CTA band ---------- */
+.app-band {
+    background: var(--lavender-deep);
+    border-radius: var(--radius-lg);
+    padding: 3.5rem 4rem;
+    margin-bottom: 5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+.app-band::after {
+    content: '';
+    position: absolute;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: var(--lavender);
+    opacity: 0.2;
+    bottom: -150px; right: -80px;
+}
+.app-band h2 {
+    color: var(--cream);
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
     font-weight: 400;
-    margin: 3rem 0 1rem;
-    padding-top: 3rem;
-    border-top: 1px dashed rgba(42, 31, 23, 0.15);
+    margin-bottom: 0.75rem;
 }
-.prose-wrap h2:first-of-type {
-    margin-top: 0;
-    padding-top: 0;
-    border-top: none;
+.app-band p {
+    color: rgba(250, 244, 232, 0.8);
+    font-size: 1.05rem;
+    margin: 0;
 }
-.prose-wrap h3 {
-    font-size: 1.2rem;
+.app-band .app-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    position: relative; z-index: 1;
+    flex: none;
+}
+.app-store-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--cream);
+    color: var(--ink);
+    border-radius: var(--radius-sm);
+    padding: 0.6rem 1.25rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
     font-weight: 500;
-    margin: 1.75rem 0 0.6rem;
-    color: var(--bark);
+    white-space: nowrap;
+    transition: transform 0.2s ease;
+    text-decoration: none;
 }
-.prose-wrap p {
+.app-store-btn:hover { transform: translateY(-2px); }
+.app-store-btn svg { width: 20px; height: 20px; flex: none; }
+
+/* ---------- Tip sheets ---------- */
+.resource-section {
+    margin-bottom: 5rem;
+}
+.resource-section h2 {
+    font-size: 1.75rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+}
+.resource-section > p {
+    font-size: 1.05rem;
     color: var(--bark-soft);
-    margin: 0 0 1.1rem;
+    margin-bottom: 2rem;
+    max-width: 48rem;
 }
-.prose-wrap ul {
+.tip-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+}
+.tip-card {
+    background: var(--cream-deep);
+    border: 1.5px solid rgba(42, 31, 23, 0.08);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.tip-card:hover { transform: translateY(-3px); border-color: var(--lavender-deep); }
+.tip-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+}
+.tip-card p {
+    font-size: 0.95rem;
     color: var(--bark-soft);
-    padding-left: 1.5rem;
-    margin: 0 0 1.1rem;
+    margin: 0;
 }
-.prose-wrap li { margin-bottom: 0.4rem; }
-.prose-wrap a {
+
+/* ---------- External links ---------- */
+.external-links {
+    background: var(--cream-deep);
+    border-radius: var(--radius-lg);
+    padding: 3rem 3.5rem;
+    margin-bottom: 5rem;
+}
+.external-links h2 {
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+}
+.external-links > p {
+    font-size: 1.05rem;
+    color: var(--bark-soft);
+    margin-bottom: 2rem;
+}
+.link-list { list-style: none; padding: 0; margin: 0; }
+.link-list li {
+    padding: 0.85rem 0;
+    border-bottom: 1px dashed rgba(42, 31, 23, 0.12);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+}
+.link-list li:last-child { border-bottom: none; }
+.link-list .link-title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.05rem;
+    color: var(--ink);
+}
+.link-list .link-desc {
+    font-size: 0.95rem;
+    color: var(--bark-soft);
+}
+.link-list a {
+    font-family: var(--font-hand);
+    font-size: 1.05rem;
     color: var(--lavender-deep);
     text-decoration: underline;
     text-underline-offset: 3px;
+    white-space: nowrap;
+    flex: none;
 }
-.prose-wrap a:hover { color: var(--tomato); }
-.contact-block {
-    background: var(--lavender-soft);
-    border-radius: var(--radius);
-    padding: 2rem 2.5rem;
-    margin-top: 3rem;
-}
-.contact-block h3 { margin-top: 0; margin-bottom: 0.75rem; }
+.link-list a:hover { color: var(--tomato); }
 
 /* ---------- Footer ---------- */
 .site-footer {
@@ -279,14 +385,24 @@ h1, h2, h3, h4 {
     font-size: 1.05rem;
 }
 
+/* ---------- Reveal ---------- */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.in { opacity: 1; transform: translateY(0); }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 960px) {
+    .app-band { grid-template-columns: 1fr; }
+    .app-band .app-btns { flex-direction: row; flex-wrap: wrap; }
+    .tip-grid { grid-template-columns: repeat(2, 1fr); }
     .footer-inner { grid-template-columns: 1fr 1fr; }
     .primary-nav { display: none; }
 }
 @media (max-width: 600px) {
     body { font-size: 17px; }
-    .prose-wrap { padding: 3rem 1.25rem 4rem; }
+    .app-band { padding: 2.5rem 1.5rem; }
+    .tip-grid { grid-template-columns: 1fr; }
+    .external-links { padding: 2rem 1.5rem; }
+    .link-list li { flex-direction: column; gap: 0.25rem; }
     .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
 }
 </style>
@@ -334,61 +450,100 @@ h1, h2, h3, h4 {
 
 <section class="page-hero">
     <div class="page-hero-inner">
-        <span class="eyebrow">Fine print</span>
-        <h1>Terms of Use</h1>
-        <p>The terms that govern your use of this website.</p>
-        <p class="effective">Effective date: May 28, 2026</p>
+        <span class="eyebrow">For families</span>
+        <h1>Resources to help your child <em>thrive</em>.</h1>
+        <p>Tools, tip sheets, and links to support your family — at the centre and at home.</p>
     </div>
 </section>
 
-<div class="prose-wrap">
+<div class="content-wrap">
 
-    <h2>About these terms</h2>
-    <p>These Terms of Use govern your access to and use of the Little Oaks Child Care Centre &amp; Montessori website at <strong>littleoaks.ca</strong> (the "Website"). By using this Website, you agree to these terms.</p>
-    <p>These terms apply to the Website only. They do not constitute or replace any service agreement, enrollment contract, or fee arrangement between Little Oaks and enrolled families. Those matters are governed by separate written agreements.</p>
-    <p>If you do not agree to these terms, please do not use this Website.</p>
+    <!-- App CTA -->
+    <div class="app-band reveal">
+        <div>
+            <h2>Stay connected with your child's day.</h2>
+            <p>The Parent app gives you real-time updates, daily reports, and a direct line to our educators — all in one place. Available on Android and iOS.</p>
+        </div>
+        <div class="app-btns">
+            <a href="https://play.google.com/store/search?q=parent+child+care+app" target="_blank" rel="noopener" class="app-store-btn">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76a1.93 1.93 0 0 1-.96-.26 2.1 2.1 0 0 1-1.04-1.84V2.34A2.1 2.1 0 0 1 2.22.5a1.93 1.93 0 0 1 1.94.07l17.5 10.08a1.97 1.97 0 0 1 0 3.42L4.16 23.65a1.93 1.93 0 0 1-.98.11z"/></svg>
+                Google Play
+            </a>
+            <a href="https://apps.apple.com/search?term=parent+child+care+app" target="_blank" rel="noopener" class="app-store-btn">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                App Store
+            </a>
+        </div>
+    </div>
 
-    <h2>Information on this website</h2>
-    <p>The information on this Website is provided for general informational purposes only. While we make reasonable efforts to keep it current and accurate, we cannot guarantee that all information is up to date at all times. Programs, fees, hours, and availability are subject to change.</p>
-    <p>Nothing on this Website constitutes professional advice of any kind — medical, legal, educational, or otherwise. Please contact us directly for information specific to your child or family.</p>
+    <!-- Tip sheets -->
+    <div class="resource-section reveal">
+        <span class="eyebrow">Parenting tip sheets</span>
+        <h2>Guides for common parenting moments.</h2>
+        <p>These resources address everyday situations for children aged 0–6, prepared to help families and caregivers navigate the moments that can be challenging — with patience and confidence.</p>
+        <div class="tip-grid">
+            <div class="tip-card">
+                <h3>Adjusting to Child Care</h3>
+                <p>How to ease the transition when starting child care — for you and your child.</p>
+            </div>
+            <div class="tip-card">
+                <h3>Separation from Family Members</h3>
+                <p>Supporting children through goodbyes, drop-offs, and temporary separations.</p>
+            </div>
+            <div class="tip-card">
+                <h3>Setting Limits</h3>
+                <p>How to set clear, consistent boundaries in a way that children understand and respect.</p>
+            </div>
+            <div class="tip-card">
+                <h3>Temper Tantrums</h3>
+                <p>Understanding why tantrums happen and calm, effective ways to respond.</p>
+            </div>
+            <div class="tip-card">
+                <h3>Choices</h3>
+                <p>Using choices to build independence and reduce conflict at home.</p>
+            </div>
+            <div class="tip-card">
+                <h3>Consequences</h3>
+                <p>The difference between punishment and consequences — and why it matters.</p>
+            </div>
+        </div>
+    </div>
 
-    <h2>Acceptable use</h2>
-    <p>You may use this Website for lawful purposes only. You agree not to:</p>
-    <ul>
-        <li>Use the Website in any way that violates applicable federal, provincial, or local law</li>
-        <li>Attempt to gain unauthorized access to any part of the Website or its supporting systems</li>
-        <li>Transmit any material that is harmful, offensive, or otherwise objectionable</li>
-        <li>Use automated means (bots, scrapers, crawlers) to collect data from this Website without our written permission</li>
-        <li>Impersonate Little Oaks or any person associated with us</li>
-    </ul>
-
-    <h2>Intellectual property</h2>
-    <p>All content on this Website — including text, illustrations, graphics, the Little Oaks name, and the brand mark — is owned by or licensed to Little Oaks Child Care Centre &amp; Montessori and is protected by Canadian copyright law.</p>
-    <p>You may view and print pages from this Website for your own personal, non-commercial use. You may not reproduce, distribute, republish, or use any content for commercial purposes without our written permission.</p>
-
-    <h2>Third-party links</h2>
-    <p>This Website may contain links to external websites for your convenience. We do not control those sites and are not responsible for their content, accuracy, or privacy practices. A link does not indicate our endorsement of that site or its operator.</p>
-
-    <h2>Disclaimer of warranties</h2>
-    <p>This Website is provided on an "as is" and "as available" basis without warranties of any kind, express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, or non-infringement. We do not warrant that the Website will be uninterrupted, error-free, or free of viruses or other harmful components.</p>
-
-    <h2>Limitation of liability</h2>
-    <p>To the fullest extent permitted by Ontario and Canadian law, Little Oaks Child Care Centre &amp; Montessori, its owners, staff, and agents shall not be liable for any direct, indirect, incidental, consequential, or special damages arising from your use of or inability to use this Website, even if we have been advised of the possibility of such damages.</p>
-
-    <h2>Governing law</h2>
-    <p>These Terms of Use are governed by and construed in accordance with the laws of the Province of Ontario and the federal laws of Canada applicable therein. Any dispute arising from these terms shall be subject to the exclusive jurisdiction of the courts of Ontario.</p>
-
-    <h2>Changes to these terms</h2>
-    <p>We may update these Terms of Use at any time. When we do, we will revise the effective date at the top of this page. Continued use of the Website after any changes constitutes your acceptance of the revised terms.</p>
-
-    <div class="contact-block">
-        <h3>Questions about these terms</h3>
-        <p>If you have any questions about these Terms of Use, please contact us:</p>
-        <p>
-            <strong>Little Oaks Child Care Centre &amp; Montessori</strong><br>
-            68 Alexandria Avenue, Waterloo, Ontario<br>
-            <a href="mailto:hello@littleoaks.ca">hello@littleoaks.ca</a>
-        </p>
+    <!-- External resources -->
+    <div class="external-links reveal">
+        <span class="eyebrow">Helpful links</span>
+        <h2>External resources for Waterloo families.</h2>
+        <p>A curated list of regional supports and services for families with young children.</p>
+        <ul class="link-list">
+            <li>
+                <div>
+                    <div class="link-title">Region of Waterloo — Children's Services</div>
+                    <div class="link-desc">Subsidized child care, fee assistance, and family programs in Waterloo Region.</div>
+                </div>
+                <a href="https://www.regionofwaterloo.ca/en/living-here/children-s-services.aspx" target="_blank" rel="noopener">Visit ↗</a>
+            </li>
+            <li>
+                <div>
+                    <div class="link-title">EarlyON Child and Family Centres</div>
+                    <div class="link-desc">Drop-in programs and community supports for families with children from birth to age 6.</div>
+                </div>
+                <a href="https://www.regionofwaterloo.ca/en/living-here/earlyon-child-and-family-centres.aspx" target="_blank" rel="noopener">Visit ↗</a>
+            </li>
+            <li>
+                <div>
+                    <div class="link-title">Ontario Child Care Fee Subsidy</div>
+                    <div class="link-desc">Information on fee subsidy programs available to eligible Ontario families.</div>
+                </div>
+                <a href="https://www.ontario.ca/page/get-help-paying-child-care" target="_blank" rel="noopener">Visit ↗</a>
+            </li>
+            <li>
+                <div>
+                    <div class="link-title">Healthy Kids Community Challenge — Waterloo</div>
+                    <div class="link-desc">Programs and resources to support healthy, active development in early childhood.</div>
+                </div>
+                <a href="https://www.regionofwaterloo.ca/en/health-and-wellness/healthy-kids-community-challenge.aspx" target="_blank" rel="noopener">Visit ↗</a>
+            </li>
+        </ul>
     </div>
 
 </div>
@@ -428,6 +583,12 @@ h1, h2, h3, h4 {
 </footer>
 
 <script>
+const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 
