@@ -678,6 +678,11 @@ section { position: relative; }
     .footer-inner { grid-template-columns: 1fr 1fr; }
     .primary-nav { display: none; }
 }
+@media (max-width: 700px) {
+    /* Push hero text below the particle graphic (graphic is anchored to W*0.36, radius W*0.22) */
+    .hero-inner { padding-top: 64vw; }
+    .hero-decor .leaf { display: none; }
+}
 @media (max-width: 600px) {
     body { font-size: 17px; }
     .section-wrap { padding: 4rem 1.25rem; }
@@ -1096,7 +1101,7 @@ section { position: relative; }
   if (!canvas) return;
   var ctx = canvas.getContext('2d');
   var W = 0, H = 0, dpr = 1;
-  var PARTICLE_COUNT = 900;
+  var PARTICLE_COUNT = 1800;
   var particles = [];
   var mouse = { x: -9999, y: -9999, active: false };
 
@@ -1171,29 +1176,35 @@ section { position: relative; }
   }
 
   // ── Shape 2: SAPLING ──
-  var pSapTrunk  = makePath('M 46 93 L 54 93 L 52 42 L 48 42 Z');
-  var pSapRootL  = makePath('M 47 89 C 37 92, 27 95, 17 98 L 16 96 C 26 93, 36 90, 46 87 Z');
-  var pSapRootR  = makePath('M 53 89 C 63 92, 73 95, 83 98 L 82 96 C 72 93, 62 90, 54 87 Z');
+  // Trunk ends at soil level (inside pot)
+  var pSapTrunk  = makePath('M 48 83 L 52 83 L 52 42 L 48 42 Z');
+  // Terracotta pot: rim, body, visible soil strip
+  var pPotRim    = makePath('M 34 81 L 66 81 L 64 87 L 36 87 Z');
+  var pPotBody   = makePath('M 36 87 L 64 87 L 61 97 L 39 97 Z');
+  var pPotSoil   = makePath('M 36 81 Q 50 77, 64 81 Q 64 87, 36 87 Z');
   // Lower leaf pair — wide sweeping teardrop angled out and up
-  var pSapLL1    = makePath('M 46 72 Q 15 62, 17 46 Q 36 41, 46 66 Z');
-  var pSapLR1    = makePath('M 54 72 Q 85 62, 83 46 Q 64 41, 54 66 Z');
+  var pSapLL1    = makePath('M 48 71 Q 15 62, 17 46 Q 36 41, 48 65 Z');
+  var pSapLR1    = makePath('M 52 71 Q 85 62, 83 46 Q 64 41, 52 65 Z');
   // Upper leaf pair — steeper angle, slightly smaller
-  var pSapLL2    = makePath('M 46 57 Q 21 46, 23 31 Q 40 28, 46 53 Z');
-  var pSapLR2    = makePath('M 54 57 Q 79 46, 77 31 Q 60 28, 54 53 Z');
+  var pSapLL2    = makePath('M 48 57 Q 21 46, 23 31 Q 40 28, 48 53 Z');
+  var pSapLR2    = makePath('M 52 57 Q 79 46, 77 31 Q 60 28, 52 53 Z');
   // Apical bud — oval teardrop at the tip
   var pSapBud    = makePath('M 50 20 C 57 20, 63 27, 61 36 C 58 43, 42 43, 39 36 C 37 27, 43 20, 50 20 Z');
 
   function saplingPoints(total) {
     var c = {
-      trunk:Math.floor(total*0.14), rootL:Math.floor(total*0.05), rootR:Math.floor(total*0.05),
-      ll1:Math.floor(total*0.17), lr1:Math.floor(total*0.17),
-      ll2:Math.floor(total*0.14), lr2:Math.floor(total*0.14), bud:0
+      trunk:   Math.floor(total * 0.07),
+      potRim:  Math.floor(total * 0.05), potBody: Math.floor(total * 0.12),
+      potSoil: Math.floor(total * 0.03),
+      ll1:     Math.floor(total * 0.17), lr1: Math.floor(total * 0.17),
+      ll2:     Math.floor(total * 0.13), lr2: Math.floor(total * 0.13), bud: 0
     };
     c.bud = total - Object.values(c).reduce(function(a,b){return a+b;},0);
     var out = [];
     fillPath(pSapTrunk,c.trunk).forEach(function(p){out.push({p:p,color:'bark'});});
-    fillPath(pSapRootL,c.rootL).forEach(function(p){out.push({p:p,color:'bark'});});
-    fillPath(pSapRootR,c.rootR).forEach(function(p){out.push({p:p,color:'bark'});});
+    fillPath(pPotRim,c.potRim).forEach(function(p){out.push({p:p,color:'terra'});});
+    fillPath(pPotBody,c.potBody).forEach(function(p){out.push({p:p,color:'terra'});});
+    fillPath(pPotSoil,c.potSoil).forEach(function(p){out.push({p:p,color:'bark'});});
     fillPath(pSapLL1,c.ll1).forEach(function(p){out.push({p:p,color:'green'});});
     fillPath(pSapLR1,c.lr1).forEach(function(p){out.push({p:p,color:'green-deep'});});
     fillPath(pSapLL2,c.ll2).forEach(function(p){out.push({p:p,color:'green'});});
@@ -1209,11 +1220,17 @@ section { position: relative; }
   var pLOBrL    = makePath('M 46 50 L 30 50 L 18 56 L 19 58 L 31 53 L 49 53 Z');
   var pLOBrR    = makePath('M 54 50 L 70 50 L 82 56 L 81 58 L 69 53 L 51 53 Z');
   var pLOCanopy = makePath('M 50 8 m -22 14 a 22 22 0 1 0 44 0 a 22 22 0 1 0 -44 0 Z M 28 30 m -16 6 a 16 16 0 1 0 32 0 a 16 16 0 1 0 -32 0 Z M 72 30 m -16 6 a 16 16 0 1 0 32 0 a 16 16 0 1 0 -32 0 Z M 18 18 m -12 4 a 12 12 0 1 0 24 0 a 12 12 0 1 0 -24 0 Z M 82 18 m -12 4 a 12 12 0 1 0 24 0 a 12 12 0 1 0 -24 0 Z');
+  // Ground mound and grass blades at the base
+  var pLOGround  = makePath('M 26 93 Q 50 90, 74 93 L 74 98 L 26 98 Z');
+  var pLOGrass1  = makePath('M 40 93 Q 38 82, 42 78 Q 44 87, 40 93 Z');
+  var pLOGrass2  = makePath('M 50 91 Q 48 80, 52 76 Q 54 85, 50 91 Z');
+  var pLOGrass3  = makePath('M 60 93 Q 62 82, 58 78 Q 56 87, 60 93 Z');
 
   function littleOakPoints(total) {
     var c = {
-      trunkF:Math.floor(total*0.10), brUL:Math.floor(total*0.04), brUR:Math.floor(total*0.04),
+      trunkF:Math.floor(total*0.08), brUL:Math.floor(total*0.04), brUR:Math.floor(total*0.04),
       brL:Math.floor(total*0.03), brR:Math.floor(total*0.03),
+      ground:Math.floor(total*0.04), grass:Math.floor(total*0.04),
       canOut:Math.floor(total*0.03), canF:0
     };
     c.canF = total - Object.values(c).reduce(function(a,b){return a+b;},0);
@@ -1223,6 +1240,9 @@ section { position: relative; }
     fillPath(pLOBrUR,c.brUR).forEach(function(p){out.push({p:p,color:'bark'});});
     fillPath(pLOBrL,c.brL).forEach(function(p){out.push({p:p,color:'bark'});});
     fillPath(pLOBrR,c.brR).forEach(function(p){out.push({p:p,color:'bark'});});
+    fillPath(pLOGround,c.ground).forEach(function(p){out.push({p:p,color:'moss'});});
+    var grassPaths=[pLOGrass1,pLOGrass2,pLOGrass3], gEach=Math.floor(c.grass/3);
+    grassPaths.forEach(function(gp){fillPath(gp,gEach).forEach(function(p){out.push({p:p,color:'green'});});});
     sampleOutline(pLOCanopy,c.canOut).forEach(function(p){out.push({p:p,color:'green'});});
     fillPath(pLOCanopy,c.canF).forEach(function(p){out.push({p:p,color:'green-deep'});});
     return out;
@@ -1235,13 +1255,20 @@ section { position: relative; }
   var pMOBrL    = makePath('M 45 50 L 22 48 L 6 54 L 7 57 L 23 52 L 47 53 Z');
   var pMOBrR    = makePath('M 55 50 L 78 48 L 94 54 L 93 57 L 77 52 L 53 53 Z');
   var pMOCanopy = makePath('M 50 5 m -30 16 a 30 30 0 1 0 60 0 a 30 30 0 1 0 -60 0 Z M 16 40 m -22 10 a 22 22 0 1 0 44 0 a 22 22 0 1 0 -44 0 Z M 84 40 m -22 10 a 22 22 0 1 0 44 0 a 22 22 0 1 0 -44 0 Z M 4 18 m -16 6 a 16 16 0 1 0 32 0 a 16 16 0 1 0 -32 0 Z M 96 18 m -16 6 a 16 16 0 1 0 32 0 a 16 16 0 1 0 -32 0 Z');
+  // Surface roots radiating from trunk base
+  var pMORootL   = makePath('M 43 93 C 32 95, 19 97, 6 99 L 5 97 C 18 95, 31 93, 42 91 Z');
+  var pMORootR   = makePath('M 57 93 C 68 95, 81 97, 94 99 L 93 97 C 80 95, 67 93, 58 91 Z');
+  var pMORootLL  = makePath('M 44 88 C 33 91, 20 94, 5 97 L 4 95 C 19 92, 32 89, 43 86 Z');
+  var pMORootRR  = makePath('M 56 88 C 67 91, 80 94, 95 97 L 94 95 C 79 92, 66 89, 57 86 Z');
 
   function mightyOakPoints(total) {
     var c = {
-      trunkF:Math.floor(total*0.08),
+      trunkF:Math.floor(total*0.07),
       brUL:Math.floor(total*0.04), brUR:Math.floor(total*0.04),
       brL:Math.floor(total*0.02), brR:Math.floor(total*0.02),
-      canOut:Math.floor(total*0.04), canF:0
+      rootL:Math.floor(total*0.02), rootR:Math.floor(total*0.02),
+      rootLL:Math.floor(total*0.02), rootRR:Math.floor(total*0.02),
+      canOut:Math.floor(total*0.03), canF:0
     };
     c.canF = total - Object.values(c).reduce(function(a,b){return a+b;},0);
     var out = [];
@@ -1250,6 +1277,10 @@ section { position: relative; }
     fillPath(pMOBrUR,c.brUR).forEach(function(p){out.push({p:p,color:'bark'});});
     fillPath(pMOBrL,c.brL).forEach(function(p){out.push({p:p,color:'bark'});});
     fillPath(pMOBrR,c.brR).forEach(function(p){out.push({p:p,color:'bark'});});
+    fillPath(pMORootL,c.rootL).forEach(function(p){out.push({p:p,color:'bark'});});
+    fillPath(pMORootR,c.rootR).forEach(function(p){out.push({p:p,color:'bark'});});
+    fillPath(pMORootLL,c.rootLL).forEach(function(p){out.push({p:p,color:'bark'});});
+    fillPath(pMORootRR,c.rootRR).forEach(function(p){out.push({p:p,color:'bark'});});
     sampleOutline(pMOCanopy,c.canOut,0.5).forEach(function(p){out.push({p:p,color:'green'});});
     fillPath(pMOCanopy,c.canF).forEach(function(p){out.push({p:p,color:'green-deep'});});
     return out;
@@ -1267,7 +1298,9 @@ section { position: relative; }
     if (tag === 'lavender')   return [184, 164, 208];
     if (tag === 'green')      return [122, 142, 111];
     if (tag === 'green-deep') return [74, 94, 66];
+    if (tag === 'moss')       return [100, 120, 88];
     if (tag === 'bark')       return [139, 90, 43];
+    if (tag === 'terra')      return [186, 98, 58];
     return [107, 84, 120];
   }
 
@@ -1293,8 +1326,9 @@ section { position: relative; }
 
   function setShape(idx) {
     var cx = W * 0.72, cy = H * 0.46;
-    if (W <= 700) { cx = W * 0.5; cy = H * 0.38; }
     var targetSize = Math.min(W, H) * 0.48;
+    // On mobile: anchor cy to W (not H) so adding CSS padding doesn't push the graphic down
+    if (W <= 700) { cx = W * 0.5; cy = W * 0.36; targetSize = W * 0.44; }
 
     var cloud = shapes[idx].fn(PARTICLE_COUNT);
     var minX=Infinity, maxX=-Infinity, minY=Infinity, maxY=-Infinity;
