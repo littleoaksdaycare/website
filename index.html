@@ -290,6 +290,73 @@ h1, h2, h3, h4 {
 .hero-decor .leaf-1 { width: 80px; top: 15%; right: 45%; transform: rotate(25deg); }
 .hero-decor .leaf-2 { width: 60px; bottom: 20%; left: 40%; transform: rotate(-40deg); }
 
+/* ---------- Hero particles ---------- */
+#hero-particles {
+    position: absolute; inset: 0; z-index: 0;
+    pointer-events: none;
+}
+
+/* ---------- Morphing tree ---------- */
+.tree-frame {
+    background: linear-gradient(180deg, #dce8d6 0%, #eef5ea 28%, #f8f0e0 64%, #e4d0b0 100%) !important;
+}
+.tree-morph { position: absolute; inset: 0; }
+.tree-stage {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    opacity: 0;
+}
+.tree-label-row {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 2.5rem 1rem 1.5rem;
+    background: linear-gradient(to top, rgba(240,230,200,0.88) 55%, transparent);
+    text-align: center; z-index: 4; pointer-events: none;
+}
+.tree-label {
+    position: absolute; bottom: 1.25rem; left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-hand); font-size: 1.5rem;
+    color: var(--lavender-deep); white-space: nowrap; opacity: 0;
+}
+.tree-label small { font-size: 0.95rem; color: var(--moss); margin-left: 0.2rem; }
+
+.tree-stage-1, .tree-label-1 { animation: treeGrow1 20s infinite; }
+.tree-stage-2, .tree-label-2 { animation: treeGrow2 20s infinite; }
+.tree-stage-3, .tree-label-3 { animation: treeGrow3 20s infinite; }
+.tree-stage-4, .tree-label-4 { animation: treeGrow4 20s infinite; }
+
+@keyframes treeGrow1 {
+    0%   { opacity: 1; }
+    20%  { opacity: 1; }
+    27%  { opacity: 0; }
+    94%  { opacity: 0; }
+    100% { opacity: 1; }
+}
+@keyframes treeGrow2 {
+    0%   { opacity: 0; }
+    22%  { opacity: 0; }
+    29%  { opacity: 1; }
+    45%  { opacity: 1; }
+    52%  { opacity: 0; }
+    100% { opacity: 0; }
+}
+@keyframes treeGrow3 {
+    0%   { opacity: 0; }
+    47%  { opacity: 0; }
+    54%  { opacity: 1; }
+    70%  { opacity: 1; }
+    77%  { opacity: 0; }
+    100% { opacity: 0; }
+}
+@keyframes treeGrow4 {
+    0%   { opacity: 0; }
+    72%  { opacity: 0; }
+    79%  { opacity: 1; }
+    93%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+
 /* ---------- Section base ---------- */
 section { position: relative; }
 .section-wrap { max-width: var(--max); margin: 0 auto; padding: 6rem 1.5rem; }
@@ -762,6 +829,7 @@ section { position: relative; }
 
 <!-- HERO -->
 <section class="hero">
+    <div id="hero-particles" aria-hidden="true"></div>
     <div class="hero-decor">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
@@ -796,79 +864,96 @@ section { position: relative; }
         </div>
 
         <div class="hero-art" aria-hidden="true">
-            <div class="frame">
-                <!-- Illustrated scene: a tree, sun, child playing -->
-                <svg class="scene" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stop-color="#fce8b8"/>
-                            <stop offset="100%" stop-color="#f3ead6"/>
-                        </linearGradient>
-                        <radialGradient id="sun" cx="50%" cy="50%">
-                            <stop offset="0%" stop-color="#fde08a"/>
-                            <stop offset="100%" stop-color="#f4c95d"/>
-                        </radialGradient>
-                    </defs>
-                    <rect width="400" height="500" fill="url(#sky)"/>
-
-                    <!-- Sun -->
-                    <circle cx="320" cy="120" r="55" fill="url(#sun)"/>
-                    <g stroke="#f4c95d" stroke-width="3" stroke-linecap="round" opacity="0.6">
-                        <line x1="320" y1="40" x2="320" y2="55"/>
-                        <line x1="380" y1="80" x2="370" y2="90"/>
-                        <line x1="400" y1="120" x2="385" y2="120"/>
-                        <line x1="380" y1="160" x2="370" y2="150"/>
-                        <line x1="260" y1="80" x2="270" y2="90"/>
-                        <line x1="240" y1="120" x2="255" y2="120"/>
-                        <line x1="260" y1="160" x2="270" y2="150"/>
-                    </g>
-
-                    <!-- Hills -->
-                    <path d="M0 380 Q 100 350, 200 370 T 400 360 L 400 500 L 0 500 Z" fill="#a8c8a0"/>
-                    <path d="M0 420 Q 120 400, 250 415 T 400 410 L 400 500 L 0 500 Z" fill="#7da06f"/>
-
-                    <!-- Big oak tree -->
-                    <rect x="80" y="280" width="22" height="140" fill="#7a4a2a" rx="3"/>
-                    <path d="M85 350 Q 60 340, 55 320" stroke="#7a4a2a" stroke-width="6" fill="none" stroke-linecap="round"/>
-                    <path d="M97 330 Q 120 320, 130 305" stroke="#7a4a2a" stroke-width="6" fill="none" stroke-linecap="round"/>
-                    <ellipse cx="91" cy="240" rx="80" ry="65" fill="#4a6741"/>
-                    <ellipse cx="60" cy="220" rx="40" ry="35" fill="#5a7751"/>
-                    <ellipse cx="125" cy="225" rx="45" ry="38" fill="#5a7751"/>
-                    <ellipse cx="91" cy="210" rx="55" ry="40" fill="#6a8761"/>
-                    <!-- Acorns hanging -->
-                    <g>
-                        <ellipse cx="50" cy="290" rx="5" ry="7" fill="#8b5a2b"/>
-                        <ellipse cx="50" cy="285" rx="5" ry="3" fill="#4a6741"/>
-                        <ellipse cx="135" cy="295" rx="5" ry="7" fill="#8b5a2b"/>
-                        <ellipse cx="135" cy="290" rx="5" ry="3" fill="#4a6741"/>
-                    </g>
-
-                    <!-- Child silhouette playing with blocks -->
-                    <g transform="translate(220, 350)">
-                        <!-- blocks -->
-                        <rect x="-10" y="50" width="30" height="30" fill="#d65a3a" rx="3"/>
-                        <rect x="25" y="50" width="30" height="30" fill="#a8c8d8" rx="3"/>
-                        <rect x="7" y="20" width="30" height="30" fill="#f4c95d" rx="3"/>
-                        <!-- child -->
-                        <circle cx="80" cy="20" r="22" fill="#f5d7b8"/>
-                        <path d="M58 18 Q 80 -5, 102 18 Q 102 5, 80 -2 Q 58 5, 58 18" fill="#7a4a2a"/>
-                        <rect x="62" y="40" width="36" height="40" fill="#d65a3a" rx="6"/>
-                        <rect x="64" y="78" width="14" height="22" fill="#3d4a5a" rx="3"/>
-                        <rect x="82" y="78" width="14" height="22" fill="#3d4a5a" rx="3"/>
-                        <!-- arm reaching -->
-                        <path d="M68 50 Q 50 60, 35 70" stroke="#f5d7b8" stroke-width="9" stroke-linecap="round" fill="none"/>
-                        <circle cx="33" cy="72" r="6" fill="#f5d7b8"/>
-                    </g>
-
-                    <!-- Birds -->
-                    <path d="M180 100 Q 190 92, 200 100 Q 210 92, 220 100" stroke="#2a1f17" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.5"/>
-                    <path d="M250 70 Q 258 64, 266 70 Q 274 64, 282 70" stroke="#2a1f17" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.4"/>
-                </svg>
+            <div class="frame tree-frame">
+                <div class="tree-morph">
+                    <!-- Stage 1: Acorn -->
+                    <svg class="tree-stage tree-stage-1" viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">
+                        <ellipse cx="100" cy="244" rx="30" ry="8" fill="#c4a882" opacity="0.45"/>
+                        <circle cx="100" cy="175" r="60" fill="none" stroke="#b8a4d0" stroke-width="1.5" opacity="0.6"/>
+                        <ellipse cx="100" cy="193" rx="27" ry="33" fill="#8b5a2b"/>
+                        <ellipse cx="92" cy="182" rx="8" ry="12" fill="#a06c35" opacity="0.45"/>
+                        <path d="M83 185 Q100 191 117 185" stroke="#5a3018" stroke-width="1" fill="none" opacity="0.3"/>
+                        <path d="M79 199 Q100 205 121 199" stroke="#5a3018" stroke-width="1" fill="none" opacity="0.3"/>
+                        <path d="M81 213 Q100 218 119 213" stroke="#5a3018" stroke-width="1" fill="none" opacity="0.3"/>
+                        <path d="M74 163 Q74 154,80 153 L120 153 Q126 154,126 163 Q126 169,100 169 Q74 169,74 163 Z" fill="#4a5e42"/>
+                        <path d="M81 158 L87 153 M92 162 L97 154 M104 162 L109 154 M115 160 L120 154" stroke="#3a4e32" stroke-width="0.8" fill="none" opacity="0.4"/>
+                        <path d="M100 152 Q99 144,100 138" stroke="#4a5e42" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                        <path d="M100 140 Q107 133,114 137 Q117 142,112 147 Q107 149,104 145 Z" fill="#7a8e6f"/>
+                    </svg>
+                    <!-- Stage 2: Sapling -->
+                    <svg class="tree-stage tree-stage-2" viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M60 234 Q100 229 140 234" stroke="#c4a882" stroke-width="2" fill="none" opacity="0.6"/>
+                        <path d="M97 228 Q87 235,76 240" stroke="#8b5a2b" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.65"/>
+                        <path d="M103 228 Q113 235,124 240" stroke="#8b5a2b" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.65"/>
+                        <rect x="97" y="163" width="6" height="67" rx="3" fill="#8b5a2b"/>
+                        <ellipse cx="81" cy="206" rx="20" ry="8" fill="#7a8e6f" transform="rotate(-25 81 206)"/>
+                        <path d="M97 206 Q89 206,81 206" stroke="#4a5e42" stroke-width="1" fill="none"/>
+                        <ellipse cx="119" cy="206" rx="20" ry="8" fill="#4a5e42" transform="rotate(25 119 206)"/>
+                        <path d="M103 206 Q111 206,119 206" stroke="#4a5e42" stroke-width="1" fill="none"/>
+                        <ellipse cx="84" cy="186" rx="16" ry="7" fill="#7a8e6f" transform="rotate(-30 84 186)"/>
+                        <path d="M97 186 Q90 186,84 186" stroke="#4a5e42" stroke-width="1" fill="none"/>
+                        <ellipse cx="116" cy="186" rx="16" ry="7" fill="#4a5e42" transform="rotate(30 116 186)"/>
+                        <path d="M103 186 Q110 186,116 186" stroke="#4a5e42" stroke-width="1" fill="none"/>
+                        <ellipse cx="100" cy="161" rx="7" ry="5" fill="#7a8e6f"/>
+                        <ellipse cx="100" cy="157" rx="4" ry="3" fill="#5a7e50"/>
+                    </svg>
+                    <!-- Stage 3: Little Oak -->
+                    <svg class="tree-stage tree-stage-3" viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">
+                        <ellipse cx="100" cy="242" rx="44" ry="10" fill="#c4a882" opacity="0.35"/>
+                        <path d="M93 234 Q83 241,72 246" stroke="#8b5a2b" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.55"/>
+                        <path d="M107 234 Q117 241,128 246" stroke="#8b5a2b" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.55"/>
+                        <rect x="92" y="152" width="16" height="84" rx="4" fill="#8b5a2b"/>
+                        <path d="M95 170 Q97 168,99 170" stroke="#5a3018" stroke-width="1" fill="none" opacity="0.4"/>
+                        <path d="M95 192 Q97 190,99 192" stroke="#5a3018" stroke-width="1" fill="none" opacity="0.4"/>
+                        <path d="M94 183 Q68 172,55 158" stroke="#8b5a2b" stroke-width="5" fill="none" stroke-linecap="round"/>
+                        <path d="M106 176 Q132 165,145 150" stroke="#8b5a2b" stroke-width="5" fill="none" stroke-linecap="round"/>
+                        <circle cx="62" cy="146" r="30" fill="#4a5e42" opacity="0.85"/>
+                        <circle cx="138" cy="140" r="33" fill="#4a5e42" opacity="0.85"/>
+                        <circle cx="100" cy="157" r="37" fill="#4a6741" opacity="0.8"/>
+                        <circle cx="78" cy="128" r="32" fill="#5a7751" opacity="0.9"/>
+                        <circle cx="122" cy="124" r="34" fill="#5a7751" opacity="0.9"/>
+                        <circle cx="100" cy="115" r="36" fill="#6a8761" opacity="0.9"/>
+                        <ellipse cx="90" cy="112" rx="18" ry="12" fill="#7a9771" opacity="0.45"/>
+                    </svg>
+                    <!-- Stage 4: Mighty Oak -->
+                    <svg class="tree-stage tree-stage-4" viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">
+                        <ellipse cx="100" cy="248" rx="58" ry="12" fill="#c4a882" opacity="0.4"/>
+                        <path d="M91 240 Q78 248,63 254" stroke="#8b5a2b" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.65"/>
+                        <path d="M100 242 Q100 250,100 257" stroke="#8b5a2b" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+                        <path d="M109 240 Q122 248,137 254" stroke="#8b5a2b" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.65"/>
+                        <rect x="90" y="122" width="20" height="122" rx="5" fill="#7a4a2a"/>
+                        <rect x="94" y="128" width="7" height="108" rx="3" fill="#8b5a2b" opacity="0.5"/>
+                        <path d="M91 158 Q97 155,103 158" stroke="#5a3018" stroke-width="1.2" fill="none" opacity="0.35"/>
+                        <path d="M91 183 Q97 180,103 183" stroke="#5a3018" stroke-width="1.2" fill="none" opacity="0.35"/>
+                        <path d="M91 208 Q97 205,103 208" stroke="#5a3018" stroke-width="1.2" fill="none" opacity="0.35"/>
+                        <path d="M92 172 Q58 159,40 142" stroke="#7a4a2a" stroke-width="7" fill="none" stroke-linecap="round"/>
+                        <path d="M108 165 Q142 152,160 135" stroke="#7a4a2a" stroke-width="7" fill="none" stroke-linecap="round"/>
+                        <path d="M93 146 Q70 133,55 115" stroke="#7a4a2a" stroke-width="5" fill="none" stroke-linecap="round"/>
+                        <path d="M107 140 Q130 127,145 109" stroke="#7a4a2a" stroke-width="5" fill="none" stroke-linecap="round"/>
+                        <circle cx="100" cy="85" r="70" fill="#3a5230" opacity="0.65"/>
+                        <circle cx="45" cy="117" r="44" fill="#4a5e42" opacity="0.9"/>
+                        <circle cx="155" cy="111" r="47" fill="#4a5e42" opacity="0.9"/>
+                        <circle cx="100" cy="128" r="50" fill="#4a6741" opacity="0.8"/>
+                        <circle cx="65" cy="79" r="42" fill="#5a7751" opacity="0.9"/>
+                        <circle cx="135" cy="73" r="45" fill="#5a7751" opacity="0.9"/>
+                        <circle cx="100" cy="65" r="50" fill="#5a7751" opacity="0.88"/>
+                        <circle cx="82" cy="52" r="34" fill="#6a8761" opacity="0.85"/>
+                        <circle cx="118" cy="48" r="32" fill="#6a8761" opacity="0.85"/>
+                        <circle cx="100" cy="40" r="38" fill="#6a8761" opacity="0.85"/>
+                        <ellipse cx="90" cy="38" rx="22" ry="15" fill="#7a9771" opacity="0.5"/>
+                        <ellipse cx="42" cy="148" rx="4" ry="5.5" fill="#8b5a2b" opacity="0.7"/>
+                        <ellipse cx="42" cy="144" rx="4" ry="2.5" fill="#4a5e42" opacity="0.7"/>
+                        <ellipse cx="158" cy="142" rx="4" ry="5.5" fill="#8b5a2b" opacity="0.7"/>
+                        <ellipse cx="158" cy="138" rx="4" ry="2.5" fill="#4a5e42" opacity="0.7"/>
+                    </svg>
+                </div>
+                <div class="tree-label-row">
+                    <span class="tree-label tree-label-1">the acorn</span>
+                    <span class="tree-label tree-label-2">Saplings <small>· beta</small></span>
+                    <span class="tree-label tree-label-3">Little Oaks <small>· gamma</small></span>
+                    <span class="tree-label tree-label-4">Mighty Oaks <small>· casa</small></span>
+                </div>
             </div>
-            <!-- <div class="badge">
-                <strong>Now</strong>
-                taking 2026 applications
-            </div> -->
         </div>
     </div>
 </section>
@@ -1192,6 +1277,37 @@ section { position: relative; }
         © <span id="year"></span> Little Oaks Child Care Centre &amp; Montessori. A small family business in Waterloo.
     </div>
 </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof particlesJS !== 'undefined') {
+        particlesJS('hero-particles', {
+            particles: {
+                number: { value: 45, density: { enable: true, value_area: 900 } },
+                color: { value: ['#b8a4d0', '#7a8e6f', '#d4a76a'] },
+                shape: { type: 'circle' },
+                opacity: { value: 0.45, random: true, anim: { enable: true, speed: 0.5, opacity_min: 0.1, sync: false } },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 130, color: '#b8a4d0', opacity: 0.18, width: 1 },
+                move: { enable: true, speed: 1.5, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: { enable: true, mode: 'bubble' },
+                    onclick: { enable: false },
+                    resize: true
+                },
+                modes: {
+                    bubble: { distance: 100, size: 5, duration: 0.5, opacity: 0.6, speed: 3 }
+                }
+            },
+            retina_detect: true
+        });
+    }
+});
+</script>
 
 <script>
 // Reveal on scroll
