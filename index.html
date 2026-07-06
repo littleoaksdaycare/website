@@ -234,43 +234,6 @@ h1, h2, h3, h4 {
     color: var(--ink);
 }
 
-/* Hero illustration: layered scene */
-.hero-art {
-    position: relative;
-    aspect-ratio: 4 / 5;
-    max-width: 480px;
-    margin-left: auto;
-}
-.hero-art .frame {
-    position: absolute; inset: 0;
-    background: var(--cream-deep);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-lift);
-    transform: rotate(-2deg);
-}
-.hero-art .scene {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-}
-.hero-art .badge {
-    position: absolute;
-    bottom: -1rem; right: -1rem;
-    background: var(--sun);
-    color: var(--ink);
-    width: 130px; height: 130px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    text-align: center;
-    font-family: var(--font-hand);
-    font-size: 1.25rem;
-    line-height: 1.1;
-    transform: rotate(8deg);
-    box-shadow: var(--shadow-soft);
-    padding: 1rem;
-    z-index: 3;
-}
-.hero-art .badge strong { font-size: 1.6rem; display: block; font-family: var(--font-display); font-weight: 600; }
 
 /* Hero background decor */
 .hero-decor { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
@@ -290,71 +253,13 @@ h1, h2, h3, h4 {
 .hero-decor .leaf-1 { width: 80px; top: 15%; right: 45%; transform: rotate(25deg); }
 .hero-decor .leaf-2 { width: 60px; bottom: 20%; left: 40%; transform: rotate(-40deg); }
 
-/* ---------- Hero particles ---------- */
-#hero-particles {
+/* ---------- Hero canvas ---------- */
+#hero-canvas {
     position: absolute; inset: 0; z-index: 0;
-    pointer-events: none;
+    pointer-events: none; width: 100%; height: 100%;
 }
 
-/* ---------- Morphing tree ---------- */
-.tree-frame {
-    background: linear-gradient(180deg, #dce8d6 0%, #eef5ea 28%, #f8f0e0 64%, #e4d0b0 100%) !important;
-}
-.tree-morph { position: absolute; inset: 0; }
-.tree-stage {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    opacity: 0;
-}
-.tree-label-row {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    padding: 2.5rem 1rem 1.5rem;
-    background: linear-gradient(to top, rgba(240,230,200,0.88) 55%, transparent);
-    text-align: center; z-index: 4; pointer-events: none;
-}
-.tree-label {
-    position: absolute; bottom: 1.25rem; left: 50%;
-    transform: translateX(-50%);
-    font-family: var(--font-hand); font-size: 1.5rem;
-    color: var(--lavender-deep); white-space: nowrap; opacity: 0;
-}
-.tree-label small { font-size: 0.95rem; color: var(--moss); margin-left: 0.2rem; }
 
-.tree-stage-1, .tree-label-1 { animation: treeGrow1 20s infinite; }
-.tree-stage-2, .tree-label-2 { animation: treeGrow2 20s infinite; }
-.tree-stage-3, .tree-label-3 { animation: treeGrow3 20s infinite; }
-.tree-stage-4, .tree-label-4 { animation: treeGrow4 20s infinite; }
-
-@keyframes treeGrow1 {
-    0%   { opacity: 1; }
-    20%  { opacity: 1; }
-    27%  { opacity: 0; }
-    94%  { opacity: 0; }
-    100% { opacity: 1; }
-}
-@keyframes treeGrow2 {
-    0%   { opacity: 0; }
-    22%  { opacity: 0; }
-    29%  { opacity: 1; }
-    45%  { opacity: 1; }
-    52%  { opacity: 0; }
-    100% { opacity: 0; }
-}
-@keyframes treeGrow3 {
-    0%   { opacity: 0; }
-    47%  { opacity: 0; }
-    54%  { opacity: 1; }
-    70%  { opacity: 1; }
-    77%  { opacity: 0; }
-    100% { opacity: 0; }
-}
-@keyframes treeGrow4 {
-    0%   { opacity: 0; }
-    72%  { opacity: 0; }
-    79%  { opacity: 1; }
-    93%  { opacity: 1; }
-    100% { opacity: 0; }
-}
 
 
 /* ---------- Section base ---------- */
@@ -768,7 +673,6 @@ section { position: relative; }
         grid-template-columns: 1fr;
         gap: 3rem;
     }
-    .hero-art { margin: 0 auto; max-width: 380px; }
     .approach-grid { grid-template-columns: 1fr; }
     .programs-grid { grid-template-columns: repeat(2, 1fr); }
     .footer-inner { grid-template-columns: 1fr 1fr; }
@@ -829,7 +733,7 @@ section { position: relative; }
 
 <!-- HERO -->
 <section class="hero">
-    <div id="hero-particles" aria-hidden="true"></div>
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
     <div class="hero-decor">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
@@ -863,98 +767,6 @@ section { position: relative; }
             </div>
         </div>
 
-        <div class="hero-art" aria-hidden="true">
-            <div class="frame tree-frame">
-                <div class="tree-morph">
-                    <!-- Stage 1: Acorn -->
-                    <svg class="tree-stage tree-stage-1" viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">
-                        <ellipse cx="100" cy="244" rx="30" ry="8" fill="#c4a882" opacity="0.45"/>
-                        <circle cx="100" cy="175" r="60" fill="none" stroke="#b8a4d0" stroke-width="1.5" opacity="0.6"/>
-                        <ellipse cx="100" cy="193" rx="27" ry="33" fill="#8b5a2b"/>
-                        <ellipse cx="92" cy="182" rx="8" ry="12" fill="#a06c35" opacity="0.45"/>
-                        <path d="M83 185 Q100 191 117 185" stroke="#5a3018" stroke-width="1" fill="none" opacity="0.3"/>
-                        <path d="M79 199 Q100 205 121 199" stroke="#5a3018" stroke-width="1" fill="none" opacity="0.3"/>
-                        <path d="M81 213 Q100 218 119 213" stroke="#5a3018" stroke-width="1" fill="none" opacity="0.3"/>
-                        <path d="M74 163 Q74 154,80 153 L120 153 Q126 154,126 163 Q126 169,100 169 Q74 169,74 163 Z" fill="#4a5e42"/>
-                        <path d="M81 158 L87 153 M92 162 L97 154 M104 162 L109 154 M115 160 L120 154" stroke="#3a4e32" stroke-width="0.8" fill="none" opacity="0.4"/>
-                        <path d="M100 152 Q99 144,100 138" stroke="#4a5e42" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                        <path d="M100 140 Q107 133,114 137 Q117 142,112 147 Q107 149,104 145 Z" fill="#7a8e6f"/>
-                    </svg>
-                    <!-- Stage 2: Sapling -->
-                    <svg class="tree-stage tree-stage-2" viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M60 234 Q100 229 140 234" stroke="#c4a882" stroke-width="2" fill="none" opacity="0.6"/>
-                        <path d="M97 228 Q87 235,76 240" stroke="#8b5a2b" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.65"/>
-                        <path d="M103 228 Q113 235,124 240" stroke="#8b5a2b" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.65"/>
-                        <rect x="97" y="163" width="6" height="67" rx="3" fill="#8b5a2b"/>
-                        <ellipse cx="81" cy="206" rx="20" ry="8" fill="#7a8e6f" transform="rotate(-25 81 206)"/>
-                        <path d="M97 206 Q89 206,81 206" stroke="#4a5e42" stroke-width="1" fill="none"/>
-                        <ellipse cx="119" cy="206" rx="20" ry="8" fill="#4a5e42" transform="rotate(25 119 206)"/>
-                        <path d="M103 206 Q111 206,119 206" stroke="#4a5e42" stroke-width="1" fill="none"/>
-                        <ellipse cx="84" cy="186" rx="16" ry="7" fill="#7a8e6f" transform="rotate(-30 84 186)"/>
-                        <path d="M97 186 Q90 186,84 186" stroke="#4a5e42" stroke-width="1" fill="none"/>
-                        <ellipse cx="116" cy="186" rx="16" ry="7" fill="#4a5e42" transform="rotate(30 116 186)"/>
-                        <path d="M103 186 Q110 186,116 186" stroke="#4a5e42" stroke-width="1" fill="none"/>
-                        <ellipse cx="100" cy="161" rx="7" ry="5" fill="#7a8e6f"/>
-                        <ellipse cx="100" cy="157" rx="4" ry="3" fill="#5a7e50"/>
-                    </svg>
-                    <!-- Stage 3: Little Oak -->
-                    <svg class="tree-stage tree-stage-3" viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">
-                        <ellipse cx="100" cy="242" rx="44" ry="10" fill="#c4a882" opacity="0.35"/>
-                        <path d="M93 234 Q83 241,72 246" stroke="#8b5a2b" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.55"/>
-                        <path d="M107 234 Q117 241,128 246" stroke="#8b5a2b" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.55"/>
-                        <rect x="92" y="152" width="16" height="84" rx="4" fill="#8b5a2b"/>
-                        <path d="M95 170 Q97 168,99 170" stroke="#5a3018" stroke-width="1" fill="none" opacity="0.4"/>
-                        <path d="M95 192 Q97 190,99 192" stroke="#5a3018" stroke-width="1" fill="none" opacity="0.4"/>
-                        <path d="M94 183 Q68 172,55 158" stroke="#8b5a2b" stroke-width="5" fill="none" stroke-linecap="round"/>
-                        <path d="M106 176 Q132 165,145 150" stroke="#8b5a2b" stroke-width="5" fill="none" stroke-linecap="round"/>
-                        <circle cx="62" cy="146" r="30" fill="#4a5e42" opacity="0.85"/>
-                        <circle cx="138" cy="140" r="33" fill="#4a5e42" opacity="0.85"/>
-                        <circle cx="100" cy="157" r="37" fill="#4a6741" opacity="0.8"/>
-                        <circle cx="78" cy="128" r="32" fill="#5a7751" opacity="0.9"/>
-                        <circle cx="122" cy="124" r="34" fill="#5a7751" opacity="0.9"/>
-                        <circle cx="100" cy="115" r="36" fill="#6a8761" opacity="0.9"/>
-                        <ellipse cx="90" cy="112" rx="18" ry="12" fill="#7a9771" opacity="0.45"/>
-                    </svg>
-                    <!-- Stage 4: Mighty Oak -->
-                    <svg class="tree-stage tree-stage-4" viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">
-                        <ellipse cx="100" cy="248" rx="58" ry="12" fill="#c4a882" opacity="0.4"/>
-                        <path d="M91 240 Q78 248,63 254" stroke="#8b5a2b" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.65"/>
-                        <path d="M100 242 Q100 250,100 257" stroke="#8b5a2b" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="0.5"/>
-                        <path d="M109 240 Q122 248,137 254" stroke="#8b5a2b" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.65"/>
-                        <rect x="90" y="122" width="20" height="122" rx="5" fill="#7a4a2a"/>
-                        <rect x="94" y="128" width="7" height="108" rx="3" fill="#8b5a2b" opacity="0.5"/>
-                        <path d="M91 158 Q97 155,103 158" stroke="#5a3018" stroke-width="1.2" fill="none" opacity="0.35"/>
-                        <path d="M91 183 Q97 180,103 183" stroke="#5a3018" stroke-width="1.2" fill="none" opacity="0.35"/>
-                        <path d="M91 208 Q97 205,103 208" stroke="#5a3018" stroke-width="1.2" fill="none" opacity="0.35"/>
-                        <path d="M92 172 Q58 159,40 142" stroke="#7a4a2a" stroke-width="7" fill="none" stroke-linecap="round"/>
-                        <path d="M108 165 Q142 152,160 135" stroke="#7a4a2a" stroke-width="7" fill="none" stroke-linecap="round"/>
-                        <path d="M93 146 Q70 133,55 115" stroke="#7a4a2a" stroke-width="5" fill="none" stroke-linecap="round"/>
-                        <path d="M107 140 Q130 127,145 109" stroke="#7a4a2a" stroke-width="5" fill="none" stroke-linecap="round"/>
-                        <circle cx="100" cy="85" r="70" fill="#3a5230" opacity="0.65"/>
-                        <circle cx="45" cy="117" r="44" fill="#4a5e42" opacity="0.9"/>
-                        <circle cx="155" cy="111" r="47" fill="#4a5e42" opacity="0.9"/>
-                        <circle cx="100" cy="128" r="50" fill="#4a6741" opacity="0.8"/>
-                        <circle cx="65" cy="79" r="42" fill="#5a7751" opacity="0.9"/>
-                        <circle cx="135" cy="73" r="45" fill="#5a7751" opacity="0.9"/>
-                        <circle cx="100" cy="65" r="50" fill="#5a7751" opacity="0.88"/>
-                        <circle cx="82" cy="52" r="34" fill="#6a8761" opacity="0.85"/>
-                        <circle cx="118" cy="48" r="32" fill="#6a8761" opacity="0.85"/>
-                        <circle cx="100" cy="40" r="38" fill="#6a8761" opacity="0.85"/>
-                        <ellipse cx="90" cy="38" rx="22" ry="15" fill="#7a9771" opacity="0.5"/>
-                        <ellipse cx="42" cy="148" rx="4" ry="5.5" fill="#8b5a2b" opacity="0.7"/>
-                        <ellipse cx="42" cy="144" rx="4" ry="2.5" fill="#4a5e42" opacity="0.7"/>
-                        <ellipse cx="158" cy="142" rx="4" ry="5.5" fill="#8b5a2b" opacity="0.7"/>
-                        <ellipse cx="158" cy="138" rx="4" ry="2.5" fill="#4a5e42" opacity="0.7"/>
-                    </svg>
-                </div>
-                <div class="tree-label-row">
-                    <span class="tree-label tree-label-1">the acorn</span>
-                    <span class="tree-label tree-label-2">Saplings <small>· beta</small></span>
-                    <span class="tree-label tree-label-3">Little Oaks <small>· gamma</small></span>
-                    <span class="tree-label tree-label-4">Mighty Oaks <small>· casa</small></span>
-                </div>
-            </div>
-        </div>
     </div>
 </section>
 
@@ -1278,35 +1090,282 @@ section { position: relative; }
     </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    if (typeof particlesJS !== 'undefined') {
-        particlesJS('hero-particles', {
-            particles: {
-                number: { value: 45, density: { enable: true, value_area: 900 } },
-                color: { value: ['#b8a4d0', '#7a8e6f', '#d4a76a'] },
-                shape: { type: 'circle' },
-                opacity: { value: 0.45, random: true, anim: { enable: true, speed: 0.5, opacity_min: 0.1, sync: false } },
-                size: { value: 3, random: true },
-                line_linked: { enable: true, distance: 130, color: '#b8a4d0', opacity: 0.18, width: 1 },
-                move: { enable: true, speed: 1.5, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: {
-                    onhover: { enable: true, mode: 'bubble' },
-                    onclick: { enable: false },
-                    resize: true
-                },
-                modes: {
-                    bubble: { distance: 100, size: 5, duration: 0.5, opacity: 0.6, speed: 3 }
-                }
-            },
-            retina_detect: true
-        });
+(function() {
+  var canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var W = 0, H = 0, dpr = 1;
+  var PARTICLE_COUNT = 900;
+  var particles = [];
+  var mouse = { x: -9999, y: -9999, active: false };
+
+  // SVG path helper
+  var svgNS = 'http://www.w3.org/2000/svg';
+  var helper = document.createElementNS(svgNS, 'svg');
+  helper.setAttribute('viewBox', '0 0 100 100');
+  helper.style.cssText = 'position:absolute;visibility:hidden;width:0;height:0;overflow:hidden';
+  document.body.appendChild(helper);
+
+  function makePath(d) {
+    var p = document.createElementNS(svgNS, 'path');
+    p.setAttribute('d', d);
+    helper.appendChild(p);
+    return p;
+  }
+
+  function sampleOutline(el, n, jitter) {
+    var len = el.getTotalLength(), out = [];
+    for (var i = 0; i < n; i++) {
+      var pt = el.getPointAtLength((i / n) * len);
+      var x = pt.x + (jitter ? (Math.random() - 0.5) * jitter : 0);
+      var y = pt.y + (jitter ? (Math.random() - 0.5) * jitter : 0);
+      out.push([x, y]);
     }
-});
+    return out;
+  }
+
+  function insidePath(el, x, y) {
+    var pt = helper.createSVGPoint();
+    pt.x = x; pt.y = y;
+    try { return el.isPointInFill(pt); } catch(e) { return false; }
+  }
+
+  function fillPath(el, n, excl) {
+    var bb = el.getBBox(), out = [], tries = 0, max = n * 60;
+    while (out.length < n && tries < max) {
+      var x = bb.x + Math.random() * bb.width;
+      var y = bb.y + Math.random() * bb.height;
+      tries++;
+      if (!insidePath(el, x, y)) continue;
+      if (excl && insidePath(excl, x, y)) continue;
+      out.push([x, y]);
+    }
+    return out;
+  }
+
+  // ── Shape 1: ACORN ──
+  var pAcornBody   = makePath('M 50 40 C 28 40, 26 93, 50 93 C 74 93, 72 40, 50 40 Z');
+  var pAcornCap    = makePath('M 27 46 Q 27 35, 50 35 Q 73 35, 73 46 Q 73 53, 50 53 Q 27 53, 27 46 Z');
+  var pAcornStem   = makePath('M 47 34 L 53 34 L 53 25 L 47 25 Z');
+  var pAcornLeaf   = makePath('M 51 27 C 57 18, 68 20, 64 30 C 61 37, 54 34, 51 27 Z');
+  var pAcornCircle = makePath('M 50 5 A 45 45 0 0 1 95 50 A 45 45 0 0 1 50 95 A 45 45 0 0 1 5 50 A 45 45 0 0 1 50 5 Z');
+
+  function acornPoints(total) {
+    var c = {
+      circle: Math.floor(total * 0.10),
+      capOut: Math.floor(total * 0.03), capFill: Math.floor(total * 0.14),
+      bodyOut: Math.floor(total * 0.04), bodyFill: Math.floor(total * 0.52),
+      stem: Math.floor(total * 0.06), leaf: 0
+    };
+    c.leaf = total - Object.values(c).reduce(function(a,b){return a+b;},0);
+    var out = [];
+    sampleOutline(pAcornCircle, c.circle, 1.5).forEach(function(p){out.push({p:p,color:'lavender'});});
+    sampleOutline(pAcornCap, c.capOut).forEach(function(p){out.push({p:p,color:'green-deep'});});
+    fillPath(pAcornCap, c.capFill).forEach(function(p){out.push({p:p,color:'green-deep'});});
+    sampleOutline(pAcornBody, c.bodyOut).forEach(function(p){out.push({p:p,color:'bark'});});
+    fillPath(pAcornBody, c.bodyFill, pAcornCap).forEach(function(p){out.push({p:p,color:'bark'});});
+    fillPath(pAcornStem, c.stem).forEach(function(p){out.push({p:p,color:'green-deep'});});
+    fillPath(pAcornLeaf, c.leaf).forEach(function(p){out.push({p:p,color:'green'});});
+    return out;
+  }
+
+  // ── Shape 2: SAPLING ──
+  var pSapTrunk  = makePath('M 46 93 L 54 93 L 52 42 L 48 42 Z');
+  var pSapRootL  = makePath('M 47 89 C 37 92, 27 95, 17 98 L 16 96 C 26 93, 36 90, 46 87 Z');
+  var pSapRootR  = makePath('M 53 89 C 63 92, 73 95, 83 98 L 82 96 C 72 93, 62 90, 54 87 Z');
+  // Lower leaf pair — wide sweeping teardrop angled out and up
+  var pSapLL1    = makePath('M 46 72 Q 15 62, 17 46 Q 36 41, 46 66 Z');
+  var pSapLR1    = makePath('M 54 72 Q 85 62, 83 46 Q 64 41, 54 66 Z');
+  // Upper leaf pair — steeper angle, slightly smaller
+  var pSapLL2    = makePath('M 46 57 Q 21 46, 23 31 Q 40 28, 46 53 Z');
+  var pSapLR2    = makePath('M 54 57 Q 79 46, 77 31 Q 60 28, 54 53 Z');
+  // Apical bud — oval teardrop at the tip
+  var pSapBud    = makePath('M 50 20 C 57 20, 63 27, 61 36 C 58 43, 42 43, 39 36 C 37 27, 43 20, 50 20 Z');
+
+  function saplingPoints(total) {
+    var c = {
+      trunk:Math.floor(total*0.14), rootL:Math.floor(total*0.05), rootR:Math.floor(total*0.05),
+      ll1:Math.floor(total*0.17), lr1:Math.floor(total*0.17),
+      ll2:Math.floor(total*0.14), lr2:Math.floor(total*0.14), bud:0
+    };
+    c.bud = total - Object.values(c).reduce(function(a,b){return a+b;},0);
+    var out = [];
+    fillPath(pSapTrunk,c.trunk).forEach(function(p){out.push({p:p,color:'bark'});});
+    fillPath(pSapRootL,c.rootL).forEach(function(p){out.push({p:p,color:'bark'});});
+    fillPath(pSapRootR,c.rootR).forEach(function(p){out.push({p:p,color:'bark'});});
+    fillPath(pSapLL1,c.ll1).forEach(function(p){out.push({p:p,color:'green'});});
+    fillPath(pSapLR1,c.lr1).forEach(function(p){out.push({p:p,color:'green-deep'});});
+    fillPath(pSapLL2,c.ll2).forEach(function(p){out.push({p:p,color:'green'});});
+    fillPath(pSapLR2,c.lr2).forEach(function(p){out.push({p:p,color:'green-deep'});});
+    fillPath(pSapBud,c.bud).forEach(function(p){out.push({p:p,color:'green'});});
+    return out;
+  }
+
+  // ── Shape 3: LITTLE OAK ──
+  var pLOTrunk  = makePath('M 44 56 L 56 56 L 58 92 L 42 92 Z');
+  var pLOBrUL   = makePath('M 47 56 L 32 44 L 22 30 L 24 28 L 35 42 L 50 54 Z');
+  var pLOBrUR   = makePath('M 53 56 L 68 44 L 78 30 L 76 28 L 65 42 L 50 54 Z');
+  var pLOBrL    = makePath('M 46 50 L 30 50 L 18 56 L 19 58 L 31 53 L 49 53 Z');
+  var pLOBrR    = makePath('M 54 50 L 70 50 L 82 56 L 81 58 L 69 53 L 51 53 Z');
+  var pLOCanopy = makePath('M 50 8 m -22 14 a 22 22 0 1 0 44 0 a 22 22 0 1 0 -44 0 Z M 28 30 m -16 6 a 16 16 0 1 0 32 0 a 16 16 0 1 0 -32 0 Z M 72 30 m -16 6 a 16 16 0 1 0 32 0 a 16 16 0 1 0 -32 0 Z M 18 18 m -12 4 a 12 12 0 1 0 24 0 a 12 12 0 1 0 -24 0 Z M 82 18 m -12 4 a 12 12 0 1 0 24 0 a 12 12 0 1 0 -24 0 Z');
+
+  function littleOakPoints(total) {
+    var c = {
+      trunkF:Math.floor(total*0.10), brUL:Math.floor(total*0.04), brUR:Math.floor(total*0.04),
+      brL:Math.floor(total*0.03), brR:Math.floor(total*0.03),
+      canOut:Math.floor(total*0.03), canF:0
+    };
+    c.canF = total - Object.values(c).reduce(function(a,b){return a+b;},0);
+    var out = [];
+    fillPath(pLOTrunk,c.trunkF).forEach(function(p){out.push({p:p,color:'bark'});});
+    fillPath(pLOBrUL,c.brUL).forEach(function(p){out.push({p:p,color:'bark'});});
+    fillPath(pLOBrUR,c.brUR).forEach(function(p){out.push({p:p,color:'bark'});});
+    fillPath(pLOBrL,c.brL).forEach(function(p){out.push({p:p,color:'bark'});});
+    fillPath(pLOBrR,c.brR).forEach(function(p){out.push({p:p,color:'bark'});});
+    sampleOutline(pLOCanopy,c.canOut).forEach(function(p){out.push({p:p,color:'green'});});
+    fillPath(pLOCanopy,c.canF).forEach(function(p){out.push({p:p,color:'green-deep'});});
+    return out;
+  }
+
+  // ── Shape 4: MIGHTY OAK ──
+  var pMOTrunk  = makePath('M 43 56 L 57 56 L 60 96 L 40 96 Z');
+  var pMOBrUL   = makePath('M 46 55 L 25 40 L 10 22 L 13 20 L 28 38 L 50 53 Z');
+  var pMOBrUR   = makePath('M 54 55 L 75 40 L 90 22 L 87 20 L 72 38 L 50 53 Z');
+  var pMOBrL    = makePath('M 45 50 L 22 48 L 6 54 L 7 57 L 23 52 L 47 53 Z');
+  var pMOBrR    = makePath('M 55 50 L 78 48 L 94 54 L 93 57 L 77 52 L 53 53 Z');
+  var pMOCanopy = makePath('M 50 5 m -30 16 a 30 30 0 1 0 60 0 a 30 30 0 1 0 -60 0 Z M 16 40 m -22 10 a 22 22 0 1 0 44 0 a 22 22 0 1 0 -44 0 Z M 84 40 m -22 10 a 22 22 0 1 0 44 0 a 22 22 0 1 0 -44 0 Z M 4 18 m -16 6 a 16 16 0 1 0 32 0 a 16 16 0 1 0 -32 0 Z M 96 18 m -16 6 a 16 16 0 1 0 32 0 a 16 16 0 1 0 -32 0 Z');
+
+  function mightyOakPoints(total) {
+    var c = {
+      trunkF:Math.floor(total*0.08),
+      brUL:Math.floor(total*0.04), brUR:Math.floor(total*0.04),
+      brL:Math.floor(total*0.02), brR:Math.floor(total*0.02),
+      canOut:Math.floor(total*0.04), canF:0
+    };
+    c.canF = total - Object.values(c).reduce(function(a,b){return a+b;},0);
+    var out = [];
+    fillPath(pMOTrunk,c.trunkF).forEach(function(p){out.push({p:p,color:'bark'});});
+    fillPath(pMOBrUL,c.brUL).forEach(function(p){out.push({p:p,color:'bark'});});
+    fillPath(pMOBrUR,c.brUR).forEach(function(p){out.push({p:p,color:'bark'});});
+    fillPath(pMOBrL,c.brL).forEach(function(p){out.push({p:p,color:'bark'});});
+    fillPath(pMOBrR,c.brR).forEach(function(p){out.push({p:p,color:'bark'});});
+    sampleOutline(pMOCanopy,c.canOut,0.5).forEach(function(p){out.push({p:p,color:'green'});});
+    fillPath(pMOCanopy,c.canF).forEach(function(p){out.push({p:p,color:'green-deep'});});
+    return out;
+  }
+
+  var shapes = [
+    { fn: acornPoints },
+    { fn: saplingPoints },
+    { fn: littleOakPoints },
+    { fn: mightyOakPoints }
+  ];
+
+  // Color resolution — Little Oaks palette
+  function resolveColor(tag) {
+    if (tag === 'lavender')   return [184, 164, 208];
+    if (tag === 'green')      return [122, 142, 111];
+    if (tag === 'green-deep') return [74, 94, 66];
+    if (tag === 'bark')       return [139, 90, 43];
+    return [107, 84, 120];
+  }
+
+  // Canvas / particle engine
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var rect = canvas.getBoundingClientRect();
+    W = rect.width; H = rect.height;
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function init() {
+    particles = [];
+    for (var i = 0; i < PARTICLE_COUNT; i++) {
+      particles.push({ x:Math.random()*W, y:Math.random()*H, tx:0, ty:0, vx:0, vy:0,
+                       size:1+Math.random()*0.7, alpha:0.6+Math.random()*0.3,
+                       r:184, g:164, b:208 });
+    }
+  }
+
+  var currentShape = 0;
+
+  function setShape(idx) {
+    var cx = W * 0.72, cy = H * 0.46;
+    if (W <= 700) { cx = W * 0.5; cy = H * 0.38; }
+    var targetSize = Math.min(W, H) * 0.48;
+
+    var cloud = shapes[idx].fn(PARTICLE_COUNT);
+    var minX=Infinity, maxX=-Infinity, minY=Infinity, maxY=-Infinity;
+    cloud.forEach(function(item){ var p=item.p;
+      if(p[0]<minX)minX=p[0]; if(p[0]>maxX)maxX=p[0];
+      if(p[1]<minY)minY=p[1]; if(p[1]>maxY)maxY=p[1];
+    });
+    var cW=maxX-minX||1, cH=maxY-minY||1;
+    var cCX=(minX+maxX)/2, cCY=(minY+maxY)/2;
+    var scale = targetSize / Math.max(cW, cH);
+
+    // Shuffle for organic morph-in
+    var idx2 = cloud.map(function(_,i){return i;});
+    for (var i=idx2.length-1; i>0; i--) {
+      var j=Math.floor(Math.random()*(i+1));
+      var tmp=idx2[i]; idx2[i]=idx2[j]; idx2[j]=tmp;
+    }
+
+    for (var i=0; i<PARTICLE_COUNT; i++) {
+      var item = cloud[idx2[i % cloud.length]];
+      var px=item.p[0], py=item.p[1];
+      particles[i].tx = cx + (px - cCX) * scale;
+      particles[i].ty = cy + (py - cCY) * scale;
+      var col = resolveColor(item.color);
+      particles[i].r=col[0]; particles[i].g=col[1]; particles[i].b=col[2];
+      particles[i].alpha = 0.72 + Math.random() * 0.22;
+      particles[i].size  = 1.0  + Math.random() * 0.8;
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i=0; i<particles.length; i++) {
+      var p=particles[i];
+      p.vx += (p.tx - p.x) * 0.012;
+      p.vy += (p.ty - p.y) * 0.012;
+      if (mouse.active) {
+        var mdx=p.x-mouse.x, mdy=p.y-mouse.y, d2=mdx*mdx+mdy*mdy;
+        if (d2 < 18000) {
+          var f=(18000-d2)/18000, d=Math.sqrt(d2)||1;
+          p.vx += (mdx/d)*f*0.9; p.vy += (mdy/d)*f*0.9;
+        }
+      }
+      p.vx *= 0.87; p.vy *= 0.87;
+      p.x += p.vx; p.y += p.vy;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba('+p.r+','+p.g+','+p.b+','+p.alpha+')';
+      ctx.fill();
+    }
+    requestAnimationFrame(animate);
+  }
+
+  window.addEventListener('mousemove', function(e) {
+    var rect = canvas.getBoundingClientRect();
+    if (e.clientY>=rect.top && e.clientY<=rect.bottom) {
+      mouse.x=e.clientX-rect.left; mouse.y=e.clientY-rect.top; mouse.active=true;
+    } else { mouse.active=false; }
+  });
+  window.addEventListener('mouseleave', function(){ mouse.active=false; });
+  window.addEventListener('resize', function(){
+    resize();
+    setShape((currentShape - 1 + shapes.length) % shapes.length);
+  });
+
+  resize(); init();
+  setShape(currentShape);
+  currentShape = 1;
+  setInterval(function(){ setShape(currentShape); currentShape=(currentShape+1)%shapes.length; }, 5000);
+  animate();
+})();
 </script>
 
 <script>
