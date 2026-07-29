@@ -175,7 +175,43 @@ h1, h2, h3, h4 {
 .primary-nav a:hover { color: var(--ink); }
 .primary-nav a:hover::after { width: 100%; }
 .header-actions { display: flex; gap: 0.5rem; align-items: center; }
-.menu-toggle { display: none; }
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px; height: 44px;
+    flex: none;
+    background: transparent;
+    border: 1.5px solid rgba(42, 31, 23, 0.15);
+    border-radius: 10px;
+    cursor: pointer;
+}
+.menu-toggle .bar {
+    display: block; width: 20px; height: 2px;
+    background: var(--bark);
+    border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+}
+.menu-toggle[aria-expanded="true"] .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.menu-toggle[aria-expanded="true"] .bar:nth-child(2) { opacity: 0; }
+.menu-toggle[aria-expanded="true"] .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-nav {
+    display: none;
+    flex-direction: column;
+    padding: 0.25rem 1.5rem 1rem;
+    border-top: 1px solid rgba(42, 31, 23, 0.08);
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a {
+    padding: 0.8rem 0.25rem;
+    font-size: 1.05rem;
+    color: var(--bark-soft);
+    border-bottom: 1px solid rgba(42, 31, 23, 0.06);
+}
+.mobile-nav a:last-child { border-bottom: none; }
+.mobile-nav a:hover { color: var(--ink); }
 
 /* ---------- Hero ---------- */
 .hero {
@@ -677,6 +713,7 @@ section { position: relative; }
     .programs-grid { grid-template-columns: repeat(2, 1fr); }
     .footer-inner { grid-template-columns: 1fr 1fr; }
     .primary-nav { display: none; }
+    .menu-toggle { display: flex; }
 }
 @media (max-width: 700px) {
     /* Push hero text below the particle graphic (graphic is anchored to W*0.36, radius W*0.22) */
@@ -726,13 +763,29 @@ section { position: relative; }
             <a href="#about">About Us</a>
             <a href="/careers">Careers</a>
             <a href="#contact">Contact</a>
+            <a href="https://shop.littleoakswaterloo.ca" class="shop-link">Shop</a>
         </nav>
 
         <div class="header-actions">
             <!-- <a href="#waitlist" class="btn btn-primary btn-sm">Join Waitlist</a> -->
             <!-- <a href="/login" class="btn btn-ghost btn-sm">Login</a> -->
+            <button class="menu-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
         </div>
     </div>
+
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Primary mobile">
+        <a href="#approach">Our Approach</a>
+        <a href="#programs">Programs</a>
+        <a href="/curriculum">Curriculum</a>
+        <a href="#about">About Us</a>
+        <a href="/careers">Careers</a>
+        <a href="#contact">Contact</a>
+        <a href="https://shop.littleoakswaterloo.ca" class="shop-link">Shop</a>
+    </nav>
 </header>
 
 <main id="main">
@@ -1418,6 +1471,33 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
 // Year in footer
 document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+<script>
+// Mobile menu
+const menuToggle = document.querySelector('.menu-toggle');
+const mobileNav = document.getElementById('mobile-nav');
+menuToggle.addEventListener('click', () => {
+    const open = mobileNav.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+mobileNav.addEventListener('click', (e) => {
+    if (e.target.tagName === 'A') {
+        mobileNav.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+    }
+});
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileNav.classList.contains('open')) {
+        mobileNav.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+    }
+});
+
+// Point Shop links at the dev shop when served from the dev host
+if (location.hostname.endsWith('ddnsfree.com')) {
+    document.querySelectorAll('a.shop-link').forEach(a => a.href = 'https://shop.littleoaksadmin.ddnsfree.com');
+}
 </script>
 
 </body>
