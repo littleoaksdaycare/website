@@ -182,11 +182,35 @@ h1, h2, h3, h4 {
 .menu-toggle[aria-expanded="true"] .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 .mobile-nav {
     display: none;
-    flex-direction: column;
-    padding: 0.25rem 1.5rem 1rem;
-    border-top: 1px solid rgba(42, 31, 23, 0.08);
+    grid-template-rows: 0fr;
+    visibility: hidden;
+    transition: grid-template-rows 0.35s ease, visibility 0s linear 0.35s;
 }
-.mobile-nav.open { display: flex; }
+.mobile-nav.open {
+    grid-template-rows: 1fr;
+    visibility: visible;
+    transition: grid-template-rows 0.35s ease, visibility 0s;
+}
+.mobile-nav-inner {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 0;
+    padding: 0 1.5rem;
+    border-top: 1px solid transparent;
+    opacity: 0;
+    transition: padding 0.35s ease, border-color 0.35s ease, opacity 0.2s ease;
+}
+.mobile-nav.open .mobile-nav-inner {
+    padding: 0.25rem 1.5rem 1rem;
+    border-top-color: rgba(42, 31, 23, 0.08);
+    opacity: 1;
+    transition: padding 0.35s ease, border-color 0.35s ease, opacity 0.3s ease 0.05s;
+}
+@media (prefers-reduced-motion: reduce) {
+    .mobile-nav, .mobile-nav.open, .mobile-nav-inner, .mobile-nav.open .mobile-nav-inner,
+    .menu-toggle .bar { transition: none; }
+}
 .mobile-nav a {
     padding: 0.8rem 0.25rem;
     font-size: 1.05rem;
@@ -324,6 +348,7 @@ h1, h2, h3, h4 {
     .footer-inner { grid-template-columns: 1fr 1fr; }
     .primary-nav { display: none; }
     .menu-toggle { display: flex; }
+    .mobile-nav { display: grid; }
 }
 @media (max-width: 600px) {
     body { font-size: 17px; }
@@ -378,13 +403,15 @@ h1, h2, h3, h4 {
     </div>
 
     <nav class="mobile-nav" id="mobile-nav" aria-label="Primary mobile">
-        <a href="/#approach">Our Approach</a>
-        <a href="/#programs">Programs</a>
-        <a href="/curriculum">Curriculum</a>
-        <a href="/about">About Us</a>
-        <a href="/careers">Careers</a>
-        <a href="/#contact">Contact</a>
-        <a href="https://shop.littleoakswaterloo.ca" class="shop-link">Shop</a>
+        <div class="mobile-nav-inner">
+            <a href="/#approach">Our Approach</a>
+            <a href="/#programs">Programs</a>
+            <a href="/curriculum">Curriculum</a>
+            <a href="/about">About Us</a>
+            <a href="/careers">Careers</a>
+            <a href="/#contact">Contact</a>
+            <a href="https://shop.littleoakswaterloo.ca" class="shop-link">Shop</a>
+        </div>
     </nav>
 </header>
 
