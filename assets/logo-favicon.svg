@@ -1,4 +1,5 @@
-<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Little Oaks">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Little Oaks">
+  <title>Little Oaks</title>
   <g transform="rotate(8 100 100)">
     <circle cx="100" cy="100" r="88" fill="none" stroke="#6b5478" stroke-width="10"/>
     <ellipse cx="100" cy="118" rx="34" ry="42" fill="#8b5a2b"/>
