@@ -618,16 +618,19 @@ h1, h2, h3, h4 {
         <h2>Send us your resume.</h2>
         <p>Even when we're not actively hiring, we keep resumes on file for when a spot opens up. Tell us a little about yourself and attach your resume — that's it.</p>
 
+        <!-- Posts to the parent portal, which mails the application to the
+             careers inbox and redirects back here with ?sent=1 (or ?error=).
+             This site is static hosting with no backend of its own; the
+             portal is the only piece that can receive an upload. The subject
+             line, the acknowledgement email and the resume handling all live
+             there now — see CareersController in the portal repo. -->
         <form class="apply-form" id="applyForm"
-              action="https://formsubmit.co/careers@littleoakswaterloo.ca"
+              action="https://parent.littleoakswaterloo.ca/careers/apply"
               method="POST"
               enctype="multipart/form-data">
 
-            <input type="hidden" name="_subject" value="New job application — littleoakswaterloo.ca">
-            <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_captcha" value="true">
-            <input type="hidden" name="_next" value="https://littleoakswaterloo.ca/careers?sent=1">
-            <input type="hidden" name="_autoresponse" value="Thanks for applying to Little Oaks Child Care Centre & Montessori! We've received your application and resume, and we read every one personally. If your experience looks like a fit, we'll be in touch.">
+            <!-- Spam trap: hidden from people, irresistible to bots. The
+                 portal drops any submission that fills it in. -->
             <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
 
             <div class="field">
@@ -785,12 +788,23 @@ document.getElementById('applyForm').addEventListener('submit', (e) => {
     btn.firstChild.textContent = 'Sending… ';
 });
 
-// After the form service redirects back with ?sent=1, show the thank-you banner
-if (new URLSearchParams(location.search).get('sent') === '1') {
+// The portal redirects back here after handling the POST: ?sent=1 on success,
+// ?error=<code> otherwise. Codes rather than messages, so the wording stays
+// here and nothing server-supplied is ever written into the page.
+const outcome = new URLSearchParams(location.search);
+
+if (outcome.get('sent') === '1') {
     document.getElementById('careers').classList.add('sent');
     const success = document.getElementById('applySuccess');
     success.classList.add('show', 'in');
     success.scrollIntoView({ block: 'center' });
+} else if (outcome.has('error')) {
+    const messages = {
+        toomany: 'We\'ve had a lot of submissions from your connection just now. Please try again a little later, or email your resume to careers@littleoakswaterloo.ca.',
+        invalid: 'Something in the form didn\'t come through — please check your name, email and resume, then send it again.'
+    };
+    showError(messages[outcome.get('error')] || 'Sorry, something went wrong sending your application. Please try again, or email your resume to careers@littleoakswaterloo.ca.');
+    document.getElementById('applyForm').scrollIntoView({ block: 'center' });
 }
 </script>
 
@@ -815,9 +829,11 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Point Shop links at the dev shop when served from the dev host
+// Point Shop links and the careers form at the dev stack when served from
+// the dev host, so a submission there never reaches the real careers inbox.
 if (location.hostname.endsWith('ddnsfree.com')) {
     document.querySelectorAll('a.shop-link').forEach(a => a.href = 'https://shop.littleoaksadmin.ddnsfree.com');
+    document.getElementById('applyForm').action = 'https://parent.littleoaksadmin.ddnsfree.com/careers/apply';
 }
 </script>
 
