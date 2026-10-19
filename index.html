@@ -601,6 +601,72 @@ section { position: relative; }
     margin-top: 1.5rem;
 }
 
+/* ---------- Waitlist pop-up ----------
+   A centred card on a wide screen, sized to the form inside it; the whole
+   screen on a phone, where a card with a page scrolling inside it is
+   fiddly. The form itself is a page on the parent portal in an iframe. */
+.waitlist-dialog {
+    width: min(680px, calc(100% - 2rem));
+    height: min(760px, calc(100vh - 3rem));
+    height: min(760px, calc(100dvh - 3rem));
+    max-width: none;
+    max-height: none;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius);
+    background: #fffdf9;
+    color: var(--bark);
+    box-shadow: var(--shadow-lift);
+    overflow: hidden;
+}
+.waitlist-dialog[open] { display: flex; flex-direction: column; }
+.waitlist-dialog::backdrop { background: rgba(42, 31, 23, 0.55); }
+.waitlist-dialog-bar {
+    flex: none;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.4rem 0.5rem 0.4rem 1.25rem;
+    border-bottom: 1px solid rgba(42, 31, 23, 0.08);
+}
+.waitlist-dialog-title {
+    font-family: var(--font-hand);
+    font-size: 1.35rem;
+    color: var(--lavender-deep);
+}
+.waitlist-dialog-close {
+    width: 44px; height: 44px;
+    display: grid; place-items: center;
+    border: 0; border-radius: 50%;
+    background: transparent;
+    color: var(--bark);
+    cursor: pointer;
+}
+.waitlist-dialog-close:hover, .waitlist-dialog-close:focus-visible { background: var(--cream-deep); }
+.waitlist-dialog-body { position: relative; flex: 1 1 auto; min-height: 0; }
+.waitlist-dialog-body iframe { position: relative; display: block; width: 100%; height: 100%; border: 0; background: transparent; }
+.waitlist-dialog-loading {
+    position: absolute; inset: 0;
+    display: grid; place-items: center;
+    margin: 0;
+    font-family: var(--font-hand);
+    font-size: 1.4rem;
+    color: var(--bark-soft);
+}
+.waitlist-dialog-loading[hidden] { display: none; }
+html.waitlist-locked, html.waitlist-locked body { overflow: hidden; }
+@media (prefers-reduced-motion: no-preference) {
+    .waitlist-dialog[open] { animation: waitlist-in 0.25s ease; }
+}
+@keyframes waitlist-in { from { opacity: 0; transform: translateY(14px); } }
+@media (max-width: 600px) {
+    .waitlist-dialog {
+        width: 100%;
+        height: 100%;
+        height: 100dvh;
+        margin: 0;
+        border-radius: 0;
+    }
+}
+
 /* ---------- Contact ---------- */
 .contact-grid {
     display: grid;
@@ -834,7 +900,7 @@ section { position: relative; }
                 Little Oaks is a family-run Montessori-inspired childcare on Alexandra Avenue for children ages 18 months to 4 years. With calm spaces, natural materials, and caring educators, we create a warm and nurturing place where children feel at home.
             </p>
             <div class="hero-cta">
-                <!-- <a href="#waitlist" class="btn btn-primary">Join the Waitlist</a> -->
+                <a href="https://parent.littleoakswaterloo.ca/waitlist/join" class="btn btn-primary waitlist-open">Join the Waitlist</a>
                 <a href="#approach" class="btn btn-ghost">See Our Approach</a>
             </div>
             <div class="hero-meta">
@@ -1043,18 +1109,22 @@ section { position: relative; }
 </section>
 
 <!-- WAITLIST -->
-<!-- <section class="waitlist" id="waitlist">
+<section class="waitlist" id="waitlist">
     <div class="waitlist-inner">
         <span class="eyebrow">Spaces fill up</span>
         <h2>Join our <em>waitlist</em>.</h2>
-        <p>We keep our rooms intentionally small, which means we can only take a limited number of new families each year. The earlier we know your child is on the way, the better we can plan for them.</p>
-        <a href="mailto:hello@littleoakswaterloo.ca?subject=Waitlist%20Inquiry%20—%20Little%20Oaks&body=Hi%20Little%20Oaks%2C%0A%0AI'd%20like%20to%20add%20my%20child%20to%20your%20waitlist.%0A%0A•%20Parent%20name%3A%20%0A•%20Child's%20name%3A%20%0A•%20Child's%20date%20of%20birth%3A%20%0A•%20Hoped-for%20start%20date%3A%20%0A•%20Phone%20number%3A%20%0A•%20Anything%20you'd%20like%20us%20to%20know%3A%20%0A%0AThank%20you!" class="btn btn-secondary">
-            Email us to join
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <p>We keep our rooms intentionally small, so we can only welcome a few new families each year. Tell us about your family, and we'll show you how to choose Little Oaks on the Region's OneList — that's how every space here is offered.</p>
+        <!-- The form lives in the parent portal, which keeps families' details
+             (this site is static hosting and has nowhere to put them). The
+             script at the bottom shows it in a pop-up; without JavaScript, or
+             in a browser without <dialog>, this is simply a link to it. -->
+        <a href="https://parent.littleoakswaterloo.ca/waitlist/join" class="btn btn-secondary waitlist-open">
+            Join the waitlist
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <p class="small">We'll get back to you within a couple of days.</p>
+        <p class="small">It takes about two minutes.</p>
     </div>
-</section> -->
+</section>
 
 <!-- CONTACT -->
 <section id="contact">
@@ -1143,6 +1213,18 @@ section { position: relative; }
 </section>
 
 </main>
+
+<dialog class="waitlist-dialog" id="waitlist-dialog" aria-label="Join the Little Oaks waitlist">
+    <div class="waitlist-dialog-bar">
+        <span class="waitlist-dialog-title" aria-hidden="true">Little Oaks waitlist</span>
+        <button type="button" class="waitlist-dialog-close" aria-label="Close">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+    </div>
+    <div class="waitlist-dialog-body">
+        <p class="waitlist-dialog-loading">Opening the form…</p>
+    </div>
+</dialog>
 
 <footer class="site-footer">
     <div class="footer-inner">
@@ -1525,6 +1607,114 @@ document.addEventListener('keydown', (e) => {
 if (location.hostname.endsWith('ddnsfree.com')) {
     document.querySelectorAll('a.shop-link').forEach(a => a.href = 'https://shop.littleoaksadmin.ddnsfree.com');
 }
+</script>
+
+<script>
+// "Join the waitlist": the form is a page on the parent portal, shown here
+// in a pop-up. The buttons are real links to it, so a browser without
+// <dialog> (or without JavaScript) just opens the form as a page.
+//
+// Phones: the pop-up fills the screen, and Back closes it — opening pushes
+// a history entry, and the form never navigates inside the frame (it sends
+// itself in place), so Back always lands here rather than inside the form.
+(function () {
+    // On the dev host, a submission must never reach the real portal.
+    const PORTAL = location.hostname.endsWith('ddnsfree.com')
+        ? 'https://parent.littleoaksadmin.ddnsfree.com'
+        : 'https://parent.littleoakswaterloo.ca';
+    const FORM_URL = PORTAL + '/waitlist/join';
+
+    const links = document.querySelectorAll('a.waitlist-open');
+    links.forEach(a => a.href = FORM_URL);
+
+    const dialog = document.getElementById('waitlist-dialog');
+    if (!dialog || typeof dialog.showModal !== 'function') { return; }
+
+    const bar = dialog.querySelector('.waitlist-dialog-bar');
+    const body = dialog.querySelector('.waitlist-dialog-body');
+    const loading = dialog.querySelector('.waitlist-dialog-loading');
+    const phone = window.matchMedia('(max-width: 600px)');
+    let frame = null;
+    let finished = false;
+    let contentHeight = 0;
+    let opener = null;
+
+    // On a wide screen, fit the card to the form, up to the window's height;
+    // past that the form scrolls inside it. On a phone CSS makes it the
+    // whole screen.
+    function fit() {
+        if (phone.matches || !contentHeight) {
+            dialog.style.height = '';
+            return;
+        }
+        dialog.style.height = Math.min(contentHeight + bar.offsetHeight, window.innerHeight - 48) + 'px';
+    }
+
+    function open(trigger) {
+        opener = trigger;
+        if (!frame) {
+            frame = document.createElement('iframe');
+            frame.title = 'Join the Little Oaks waitlist';
+            frame.addEventListener('load', () => { loading.hidden = true; });
+            frame.src = FORM_URL;
+            loading.hidden = false;
+            body.appendChild(frame);
+        }
+        dialog.showModal();
+        document.documentElement.classList.add('waitlist-locked');
+        history.pushState({ waitlistDialog: true }, '');
+        fit();
+    }
+
+    links.forEach(a => a.addEventListener('click', (event) => {
+        // Let "open in a new tab" do what it says.
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) { return; }
+        event.preventDefault();
+        open(a);
+    }));
+
+    dialog.querySelector('.waitlist-dialog-close').addEventListener('click', () => dialog.close());
+
+    // A click on the dimmed page around the card closes it.
+    dialog.addEventListener('click', (event) => {
+        if (event.target === dialog) { dialog.close(); }
+    });
+
+    // However it closed — the X, Escape, the backdrop or Back.
+    dialog.addEventListener('close', () => {
+        document.documentElement.classList.remove('waitlist-locked');
+        if (history.state && history.state.waitlistDialog) { history.back(); }
+        // A family who finished gets a fresh form next time; one who closed
+        // it halfway finds what they typed still there.
+        if (finished) {
+            frame.remove();
+            frame = null;
+            finished = false;
+            contentHeight = 0;
+            dialog.style.height = '';
+        }
+        if (opener) { opener.focus(); }
+    });
+
+    window.addEventListener('popstate', () => {
+        if (dialog.open) { dialog.close(); }
+    });
+
+    // The form reports its height, and whether the family has finished. Only
+    // from the portal, and only from our own frame.
+    window.addEventListener('message', (event) => {
+        if (event.origin !== PORTAL || !frame || event.source !== frame.contentWindow) { return; }
+        const data = event.data;
+        if (!data || data.source !== 'littleoaks-waitlist') { return; }
+        if (typeof data.height === 'number' && data.height > 0) {
+            contentHeight = data.height;
+            fit();
+        }
+        finished = data.done === true;
+    });
+
+    window.addEventListener('resize', fit);
+})();
 </script>
 
 </body>
