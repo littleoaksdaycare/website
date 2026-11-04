@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Careers — Little Oaks Child Care Centre & Montessori</title>
-<meta name="description" content="Join a small, family-run Montessori child care centre in Waterloo. Send us your resume — we read every application.">
+<meta name="description" content="Join a small, family-run Montessori child care centre in Waterloo. We post our shifts and hire educators through Staff My Centre (staffmycentre.ca).">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +23,7 @@
 <meta property="og:url" content="https://littleoakswaterloo.ca/careers">
 <meta property="og:site_name" content="Little Oaks Child Care Centre & Montessori">
 <meta property="og:title" content="Careers — Little Oaks Child Care Centre & Montessori">
-<meta property="og:description" content="Join a small, family-run Montessori child care centre in Waterloo. Send us your resume — we read every application.">
+<meta property="og:description" content="Join a small, family-run Montessori child care centre in Waterloo. We post our shifts and hire educators through Staff My Centre (staffmycentre.ca).">
 <meta property="og:image" content="https://littleoakswaterloo.ca/assets/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -307,6 +307,106 @@ h1, h2, h3, h4 {
     margin: 0;
 }
 
+/* ---------- Staff My Centre band ---------- */
+.smc-band {
+    max-width: 960px;
+    margin: 0 auto 5rem;
+    background: var(--moss-deep);
+    color: var(--cream);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lift);
+    padding: 3.5rem;
+}
+.smc-band .eyebrow { color: var(--sun); }
+.smc-band .eyebrow::before { background: var(--sun); }
+.smc-band h2 {
+    color: var(--cream);
+    font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+.smc-band h2 em {
+    font-style: italic;
+    color: var(--sun);
+    font-variation-settings: "SOFT" 100;
+}
+.smc-lead {
+    font-size: 1.15rem;
+    color: rgba(250, 244, 232, 0.88);
+    max-width: 42rem;
+    margin: 0 0 2.5rem;
+}
+.smc-steps {
+    list-style: none;
+    margin: 0 0 2.5rem;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    counter-reset: smc-step;
+}
+.smc-steps li {
+    counter-increment: smc-step;
+    background: rgba(250, 244, 232, 0.08);
+    border: 1px solid rgba(250, 244, 232, 0.14);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+}
+.smc-steps li::before {
+    content: counter(smc-step);
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 2rem; height: 2rem;
+    border-radius: 999px;
+    background: var(--sun);
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+.smc-steps h3 {
+    color: var(--cream);
+    font-size: 1.2rem;
+    margin-bottom: 0.4rem;
+}
+.smc-steps p {
+    margin: 0;
+    font-size: 1rem;
+    color: rgba(250, 244, 232, 0.8);
+}
+.smc-perks {
+    list-style: none;
+    margin: 0 0 2.5rem;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem 2rem;
+    font-size: 1rem;
+    color: rgba(250, 244, 232, 0.88);
+}
+.smc-perks li { display: flex; gap: 0.6rem; align-items: baseline; }
+.smc-perks li::before { content: '✓'; color: var(--sun); font-weight: 600; flex: none; }
+.smc-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+}
+.btn-sun {
+    background: var(--sun);
+    color: var(--ink);
+    box-shadow: 0 2px 0 #c9a23f;
+}
+.btn-sun:hover { transform: translateY(-2px); box-shadow: 0 4px 0 #c9a23f; background: #f7d47a; }
+.btn-sun:active { transform: translateY(1px); box-shadow: 0 1px 0 #c9a23f; }
+.smc-actions .smc-note {
+    font-size: 0.95rem;
+    color: rgba(250, 244, 232, 0.75);
+}
+.smc-actions .smc-note a {
+    color: var(--cream);
+    border-bottom: 1px solid rgba(250, 244, 232, 0.4);
+}
+
 /* ---------- Apply card ---------- */
 .apply-card {
     max-width: 760px;
@@ -501,6 +601,7 @@ h1, h2, h3, h4 {
 /* ---------- Responsive ---------- */
 @media (max-width: 960px) {
     .values-grid { grid-template-columns: 1fr 1fr; }
+    .smc-steps { grid-template-columns: 1fr; }
     .footer-inner { grid-template-columns: 1fr 1fr; }
     .primary-nav { display: none; }
     .menu-toggle { display: flex; }
@@ -510,6 +611,9 @@ h1, h2, h3, h4 {
     body { font-size: 17px; }
     .values-band { padding: 2.5rem 1.5rem; }
     .values-grid { grid-template-columns: 1fr; }
+    .smc-band { padding: 2.5rem 1.5rem; }
+    .smc-perks { grid-template-columns: 1fr; }
+    .smc-actions .btn { white-space: normal; }
     .apply-card { padding: 2.5rem 1.5rem; }
     .apply-form { grid-template-columns: 1fr; }
     .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
@@ -580,7 +684,7 @@ h1, h2, h3, h4 {
     <div class="page-hero-inner">
         <span class="eyebrow">Join our team</span>
         <h1>Do work that <em>matters</em>.</h1>
-        <p>We're a small, family-run centre where educators are known, valued, and stay for years. If that sounds like your kind of place, we'd love to hear from you.</p>
+        <p>We're a small, family-run centre where educators are known, valued, and stay for years. We post our open shifts and hire educators through <a href="#staffmycentre" style="border-bottom:1px solid var(--lavender)">Staff My Centre</a>, so that's the place to start.</p>
     </div>
 </section>
 
@@ -605,6 +709,44 @@ h1, h2, h3, h4 {
         </div>
     </div>
 
+    <!-- Staff My Centre: the primary way to apply. Claims below mirror the
+         educator section of staffmycentre.ca — keep them in step with it. -->
+    <section class="smc-band reveal" id="staffmycentre" aria-labelledby="smc-title">
+        <span class="eyebrow">How we hire</span>
+        <h2 id="smc-title">We fill our shifts through <em>Staff My Centre</em>.</h2>
+        <p class="smc-lead">Little Oaks posts its open shifts on <strong>staffmycentre.ca</strong> and books educators from there as we need them. If you're an RECE or ECA and want to work with us, signing up there is the quickest way onto our team. It's how we'll see you when a shift opens up.</p>
+
+        <ol class="smc-steps">
+            <li>
+                <h3>Create your profile</h3>
+                <p>Sign up as an educator on staffmycentre.ca and add your experience and the days you're available.</p>
+            </li>
+            <li>
+                <h3>Get checked once</h3>
+                <p>The Staff My Centre team interviews you and reviews your documents before your first shift.</p>
+            </li>
+            <li>
+                <h3>Pick up our shifts</h3>
+                <p>When Little Oaks posts a shift, you see the pay and the hours up front and accept the ones that suit you.</p>
+            </li>
+        </ol>
+
+        <ul class="smc-perks">
+            <li>Free to join and free to use</li>
+            <li>Choose the days and hours you work</li>
+            <li>See the pay on every shift before you accept</li>
+            <li>Staff My Centre never takes a cut of your pay</li>
+        </ul>
+
+        <div class="smc-actions">
+            <a href="https://staffmycentre.ca/register/worker" class="btn btn-sun">
+                Join as an educator on Staff My Centre
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <span class="smc-note">Already have an account? <a href="https://staffmycentre.ca/login">Sign in</a></span>
+        </div>
+    </section>
+
     <!-- Success banner (shown after redirect back from form service) -->
     <div class="apply-success reveal" id="applySuccess" role="status">
         <span class="success-hand">Thank you!</span>
@@ -614,9 +756,9 @@ h1, h2, h3, h4 {
 
     <!-- Application form -->
     <div class="apply-card reveal">
-        <span class="eyebrow">Apply</span>
-        <h2>Send us your resume.</h2>
-        <p>Even when we're not actively hiring, we keep resumes on file for when a spot opens up. Tell us a little about yourself and attach your resume — that's it.</p>
+        <span class="eyebrow">Other roles</span>
+        <h2>Not an educator? Send us your resume.</h2>
+        <p>Staff My Centre is for RECEs and ECAs. For kitchen and other roles, or if you'd simply like us to keep your resume on file, attach it here. Educators: please also <a href="https://staffmycentre.ca/register/worker" style="color:var(--lavender-deep);border-bottom:1px solid var(--lavender)">sign up on Staff My Centre</a>, because that's where we book our shifts.</p>
 
         <!-- Posts to the parent portal, which mails the application to the
              careers inbox and redirects back here with ?sent=1 (or ?error=).
